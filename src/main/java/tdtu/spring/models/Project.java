@@ -25,7 +25,7 @@ public class Project {
 	public Project() {
 		super();
 	}
-	
+
 	public Project(String name, String description, int target_fund, int current_fund) {
 		super();
 		this.name = name;
