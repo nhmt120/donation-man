@@ -30,20 +30,22 @@ public class ProjectController {
 //		model.addAttribute("project", new Project());
 //		return "add-project";
 //	}
-//
-//	@PostMapping("/add")
-//	public String saveProject(@ModelAttribute("project") Project project) {
-//
-//		String name = project.getName();
-//		String description = project.getDescription();
-//		int targetFund = project.getTargetFund();
-//		int currentFund = project.getCurrentFund();
-//
-//		Project newProject = new Project(name, description, targetFund, currentFund);
-//		service.save(newProject);
-//		return "redirect:/projects";
-//	}
-//
+
+	@PostMapping("/add")
+	public String saveProject(@ModelAttribute("project") Project project) {
+
+		String name = project.getName();
+		String description = project.getDescription();
+		
+		// optional because there are default value of it already, set it later if wanted
+//		double targetFund = project.getTargetFund();
+//		double currentFund = project.getCurrentFund(); 
+
+		Project newProject = new Project(name, description);
+		service.save(newProject);
+		return "redirect:/projects";
+	}
+
 //	@GetMapping("/update/{id}")
 //	public String showUpdateProject(Model model, @PathVariable(name = "id") int id) {
 //		Project project = service.get(id);
@@ -51,21 +53,24 @@ public class ProjectController {
 //		return "update-project";
 //	}
 //
-//	@PostMapping("/update")
-//	public String updateProject(@ModelAttribute("project") Project project) {
-//		String name = project.getName();
-//		String description = project.getDescription();
-//		int targetFund = project.getTargetFund();
-//		int currentFund = project.getCurrentFund();
-//
-//		Project updatedProject = new Project(name, description, targetFund, currentFund);
-//		service.update(updatedProject);
-//		return "redirect:/projects";
-//	}
-//
-//	@GetMapping("/delete/{id}")
-//	public String deleteProject(Model model, @PathVariable(name = "id") int id) {
-//		service.delete(id);
-//		return "redirect:/projects";
-//	}
+	@PostMapping("/update")
+	public String updateProject(@ModelAttribute("project") Project project) {
+		int id = project.getId();
+		String name = project.getName();
+		String description = project.getDescription();
+		double targetFund = project.getTargetFund();
+		double currentFund = project.getCurrentFund();
+
+		Project updatedProject = new Project(name, description, targetFund, currentFund);
+		updatedProject.setId(id);
+		service.update(updatedProject);
+		
+		return "redirect:/projects";
+	}
+
+	@GetMapping("/delete/{id}")
+	public String deleteProject(Model model, @PathVariable(name = "id") int id) {
+		service.delete(id);
+		return "redirect:/projects";
+	}
 }

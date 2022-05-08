@@ -2,36 +2,44 @@ package tdtu.spring.models;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.ColumnDefault;
+
 @Entity
 @Table(name = "Project")
 public class Project {
+	
 	@Id
-	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Column(name = "name")
+	@Column(nullable = false)
 	private String name;
 
-	@Column(name = "description")
+	@Column(nullable = false)
 	private String description;
 
-	@Column(name = "target_fund")
-	private int targetFund;
+	@ColumnDefault("1000000")
+	private double targetFund = 1000000;
 
-	@Column(name = "current_fund")
-	private int currentFund;
+	@ColumnDefault("0")
+	private double currentFund = 0;
 
 	public Project() {
 		super();
 	}
 
-	public Project(String name, String description, int target_fund, int current_fund) {
+	public Project(String name, String description) {
 		super();
 		this.name = name;
 		this.description = description;
-		this.targetFund = target_fund;
-		this.currentFund = current_fund;
+	}
+
+	public Project(String name, String description, double targetFund, double currentFund) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.targetFund = targetFund;
+		this.currentFund = currentFund;
 	}
 
 	public int getId() {
@@ -58,19 +66,20 @@ public class Project {
 		this.description = description;
 	}
 
-	public int getTargetFund() {
+	public double getTargetFund() {
 		return targetFund;
 	}
 
-	public void setTargetFund(int targetFund) {
+	public void setTargetFund(double targetFund) {
 		this.targetFund = targetFund;
 	}
 
-	public int getCurrentFund() {
+	public double getCurrentFund() {
 		return currentFund;
 	}
 
-	public void setCurrentFund(int currentFund) {
+	public void setCurrentFund(double currentFund) {
 		this.currentFund = currentFund;
 	}
+
 }

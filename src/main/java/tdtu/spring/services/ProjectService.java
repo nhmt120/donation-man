@@ -36,7 +36,7 @@ public class ProjectService {
 		repo.deleteById(id);
 	}
 
-//	public void update(Project project) {
-//		repo.updateById(project.getName(), project.getDescription(), project.getTargetFund(), project.getCurrentFund());
-//	}
+	public void update(Project project) {
+		repo.updateById(project.getId(), project.getName(), project.getDescription(), project.getTargetFund(), project.getCurrentFund());
+	}
 }
