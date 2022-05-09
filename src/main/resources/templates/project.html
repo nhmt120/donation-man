@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Project Details</title>
+    <link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+	<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}" rel="stylesheet">
+    <link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div  th:replace="/fragments/header::header">
+	</div>
+	
+	<div class="title">
+		<h1>Child Education in Africa</h1>
+	</div>
+	<div class="row">
+		<div class="mb-5 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+			<img width="100%" height="500px" src="/images/events/image_08.jpg" alt="">
+		</div>
+		<div class="mb-5 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+			<div class="card">
+				<div class="text-center pt-2 h4">Child Education in Africa</div>
+				<table>
+					<tr>
+						<td class="header">Raised:</td>
+						<td>$34,425 / $500,000</td>
+					</tr>
+					<tr>
+<!-- 						<td class="header">Lịch trình:</td> -->
+<!-- 						<td><?=$dnights?> đêm</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td class="header">Khởi hành:</td> -->
+<!-- 						<td><?=$ddstart?></td> -->
+<!-- 					</tr> -->
+<!-- 					<tr> -->
+<!-- 						<td class="header">Xuất phát:</td> -->
+<!-- 						<td><?=$dlstart?></td> -->
+<!-- 					</tr> -->
+					<tr>
+						<td class="header">Mô tả:</td>
+						<td>Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's </td>
+					</tr>
+				</table>
+			</div>
+
+			<div class="p-3 mt-3">
+<!-- 				<h3 style="font-weight: bold;"><?=number_format($dprice)?>đ</h3> -->
+				<button class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;">Donate</button>
+			</div>
+		</div>
+	</div>
+	
+	<div th:replace="/fragments/footer::footer">
+    </div>
+    <div th:replace="/fragments/footer::copy">
+    </div>
+</body>
+</html>
