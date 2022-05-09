@@ -540,6 +540,17 @@ header {
 .events .event-ro .event-box .desic {
   font-size: 13px;
   margin-bottom: 15px; }
+  
+.project-info tr {
+	border-top: 1px solid #ddd;
+}
+.project-info tr td, .project-info tr th {
+	padding: 5px;
+}
+.project-info tr th.fit {
+	white-space: nowrap;
+    width: 1%;
+}
 
 /* ===================================== Mission Vision CSS ================================== */
 .mission-vision {

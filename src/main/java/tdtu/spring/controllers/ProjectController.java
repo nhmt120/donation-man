@@ -39,6 +39,12 @@ public class ProjectController {
 		model.addAttribute("project", new Project());
 		return "add-project";
 	}
+	
+	@GetMapping("/detail")
+	public String showProjectDetail() {
+//		model.addAttribute("project", new Project());
+		return "project";
+	}
 
 	@PostMapping("/add")
 	public String saveProject(@ModelAttribute("project") Project project) {
