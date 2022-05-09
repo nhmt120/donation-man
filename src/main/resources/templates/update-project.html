@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Update Project</title>
+<script>
+	function confirmAction() {
+		let confirmAction = confirm("Are you sure you want to update this project?");
+		if (confirmAction) {
+			alert("Project updated successfully.");
+		} else {
+			cancel();
+		}
+	}
+
+	function cancel() {
+		event.preventDefault();
+	}
+</script>
+</head>
+<body>
+	<h1>Update Project</h1>
+	<form th:action="@{/projects/update}" th:object=${project} method="post">
+		Project ID:
+		<input type="hidden" th:field="*{id}" />
+		<br>
+		Name:
+		<input type="text" th:field="*{name}" th:value="${project.name}" />
+		<br>
+		Description:
+		<input type="text" th:field="*{description}" th:value="${project.description}" />
+		<br>
+		Target Fund:
+		<input type="text" th:field="*{targetFund}" th:value="${project.targetFund}" />
+		<br>
+		Current Fund:
+		<input disabled type="text" th:field="*{currentFund}" th:value="${project.currentFund}" />
+		<br>
+		<input onclick="confirmAction()" type="submit" value="Update">
+	</form>
+	<br />
+</body>
+</html>

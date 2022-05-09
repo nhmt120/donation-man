@@ -25,43 +25,39 @@ public class ProjectController {
 		return "home";
 	}
 
-//	@GetMapping("/add")
-//	public String showAddProject(Model model) {
-//		model.addAttribute("project", new Project());
-//		return "add-project";
-//	}
+	@GetMapping("/add")
+	public String showAddProject(Model model) {
+		model.addAttribute("project", new Project());
+		return "add-project";
+	}
 
 	@PostMapping("/add")
 	public String saveProject(@ModelAttribute("project") Project project) {
 
 		String name = project.getName();
 		String description = project.getDescription();
-		
-		// optional because there are default value of it already, set it later if wanted
-//		double targetFund = project.getTargetFund();
-//		double currentFund = project.getCurrentFund(); 
+		double targetFund = project.getTargetFund();		
 
-		Project newProject = new Project(name, description);
+		Project newProject = new Project(name, description, targetFund);
 		service.save(newProject);
 		return "redirect:/projects";
 	}
 
-//	@GetMapping("/update/{id}")
-//	public String showUpdateProject(Model model, @PathVariable(name = "id") int id) {
-//		Project project = service.get(id);
-//		model.addAttribute("project", project);
-//		return "update-project";
-//	}
-//
+	@GetMapping("/update/{id}")
+	public String showUpdateProject(Model model, @PathVariable(name = "id") int id) {
+		Project project = service.get(id);
+		model.addAttribute("project", project);
+		return "update-project";
+	}
+
 	@PostMapping("/update")
 	public String updateProject(@ModelAttribute("project") Project project) {
 		int id = project.getId();
 		String name = project.getName();
 		String description = project.getDescription();
 		double targetFund = project.getTargetFund();
-		double currentFund = project.getCurrentFund();
 
-		Project updatedProject = new Project(name, description, targetFund, currentFund);
+		Project updatedProject = new Project(name, description, targetFund);
 		updatedProject.setId(id);
 		service.update(updatedProject);
 		

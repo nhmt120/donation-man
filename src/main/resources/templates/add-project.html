@@ -1,29 +1,26 @@
-<!-- <!DOCTYPE HTML> -->
-<!-- <html xmlns:th="http://www.thymeleaf.org"> -->
-<!--    <head> -->
-<!--       <meta charset="UTF-8" /> -->
-<!--       <title>Add Person</title> -->
-<!-- <!--       <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> --> -->
-<!--    </head> -->
-<!--    <body> -->
-<!--       <h1>Add a new Project:</h1> -->
-          
-<!--       <form th:action="@{add}" -->
-<!--          th:object="${project}" method="post"> -->
-<!--          Name: -->
-<!--          <input type="text" th:field="*{name}" />      -->
-<!--          <br/> -->
-<!--          Description: -->
-<!--          <input type="text" th:field="*{ram}" />      -->
-<!--          <br/> -->
-<!--          Price: -->
-<!--          <input type="text" th:field="*{price}" />      -->
-<!--          <br/> -->
-<!--          <input type="submit" value="Add" /> -->
-<!--       </form> -->
-      
-<!--       <br/> -->
-
-      
-<!--    </body> -->
-<!-- </html> -->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<title>Add Project</title>
+<!--       <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> -->
+</head>
+<body>
+	<h1>Add a new Project:</h1>
+	<form th:action="@{add}" th:object="${project}" method="post">
+		Name:
+		<input type="text" th:field="*{name}" />
+		<br>
+		Description:
+		<input type="text" th:field="*{description}" />
+		<br>
+		Target Fund:
+		<input type="text" th:field="*{targetFund}" />
+		<br>
+		Current Fund:
+		<input disabled type="text" th:field="*{currentFund}" />
+		<br>
+		<input type="submit" value="Add" />
+	</form>
+</body>
+</html>

@@ -18,8 +18,8 @@ public class Project {
 	@Column(nullable = false)
 	private String description;
 
-	@ColumnDefault("1000000")
-	private double targetFund = 1000000;
+	@Column(nullable = false)
+	private double targetFund;
 
 	@ColumnDefault("0")
 	private double currentFund = 0;
@@ -34,12 +34,11 @@ public class Project {
 		this.description = description;
 	}
 
-	public Project(String name, String description, double targetFund, double currentFund) {
+	public Project(String name, String description, double targetFund) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.targetFund = targetFund;
-		this.currentFund = currentFund;
 	}
 
 	public int getId() {
