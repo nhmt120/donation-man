@@ -7,7 +7,7 @@ import org.hibernate.annotations.ColumnDefault;
 @Entity
 @Table(name = "Project")
 public class Project {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
@@ -26,12 +26,6 @@ public class Project {
 
 	public Project() {
 		super();
-	}
-
-	public Project(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
 	}
 
 	public Project(String name, String description, double targetFund) {
@@ -81,4 +75,9 @@ public class Project {
 		this.currentFund = currentFund;
 	}
 
+	@Override
+	public String toString() {
+		return "Project [id=" + id + ", name=" + name + ", description=" + description + ", targetFund=" + targetFund
+				+ ", currentFund=" + currentFund + "]";
+	}
 }
