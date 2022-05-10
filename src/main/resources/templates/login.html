@@ -15,19 +15,27 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-<div class="login-container">
-	<form class="form-edit" action="" method="">
-        <div class="container">
-		    <label for="uname"><b>Username</b></label>
-		    <input type="text" placeholder="Enter Username" name="uname" required>
-		
-		    <label for="psw"><b>Password</b></label>
-		    <input type="password" placeholder="Enter Password" name="psw" required>
-		
-		    <button type="submit" class = "btn btn-primary">Login</button>
+	<div th:replace="/fragments/header::header"></div>
+
+	<div class="login-container">
+		<div class="text-center">
+			<h1>Login</h1>
 		</div>
-    </form>
-</div>
+		<form class="form-edit" action="" method="">
+	        <div class="container">
+			    <label for="uname"><b>Username</b></label>
+			    <input type="text" placeholder="Enter Username" name="uname" required>
+			
+			    <label for="psw"><b>Password</b></label>
+			    <input type="password" placeholder="Enter Password" name="psw" required>
+			
+			    <button type="submit" class = "btn btn-primary">Login</button>
+			</div>
+	    </form>
+	</div>
+
+	<div th:replace="/fragments/footer::footer"></div>
+	<div th:replace="/fragments/footer::copy"></div>
 	
 </body>
 </html>
