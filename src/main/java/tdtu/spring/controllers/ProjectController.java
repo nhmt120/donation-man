@@ -51,7 +51,7 @@ public class ProjectController {
 
 		String name = project.getName();
 		String description = project.getDescription();
-		double targetFund = project.getTargetFund();		
+		int targetFund = project.getTargetFund();		
 
 		Project newProject = new Project(name, description, targetFund);
 		service.save(newProject);
@@ -70,7 +70,7 @@ public class ProjectController {
 		int id = project.getId();
 		String name = project.getName();
 		String description = project.getDescription();
-		double targetFund = project.getTargetFund();
+		int targetFund = project.getTargetFund();
 
 		Project updatedProject = new Project(name, description, targetFund);
 		updatedProject.setId(id);

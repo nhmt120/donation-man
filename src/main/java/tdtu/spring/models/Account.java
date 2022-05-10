@@ -25,7 +25,7 @@ public class Account {
 	private String role = "user";
 
 	@ColumnDefault("0")
-	private double balance = 0;
+	private int balance = 0;
 
 	public Account() {
 		super();
@@ -86,11 +86,11 @@ public class Account {
 		this.role = role;
 	}
 
-	public double getBalance() {
+	public int getBalance() {
 		return balance;
 	}
 
-	public void setBalance(double balance) {
+	public void setBalance(int balance) {
 		this.balance = balance;
 	}
 }

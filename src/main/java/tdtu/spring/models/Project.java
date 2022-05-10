@@ -19,16 +19,16 @@ public class Project {
 	private String description;
 
 	@Column(nullable = false)
-	private double targetFund;
+	private int targetFund;
 
 	@ColumnDefault("0")
-	private double currentFund = 0;
+	private int currentFund = 0;
 
 	public Project() {
 		super();
 	}
 
-	public Project(String name, String description, double targetFund) {
+	public Project(String name, String description, int targetFund) {
 		super();
 		this.name = name;
 		this.description = description;
@@ -59,19 +59,19 @@ public class Project {
 		this.description = description;
 	}
 
-	public double getTargetFund() {
+	public int getTargetFund() {
 		return targetFund;
 	}
 
-	public void setTargetFund(double targetFund) {
+	public void setTargetFund(int targetFund) {
 		this.targetFund = targetFund;
 	}
 
-	public double getCurrentFund() {
+	public int getCurrentFund() {
 		return currentFund;
 	}
 
-	public void setCurrentFund(double currentFund) {
+	public void setCurrentFund(int currentFund) {
 		this.currentFund = currentFund;
 	}
 
