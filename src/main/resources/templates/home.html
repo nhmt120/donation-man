@@ -93,29 +93,31 @@
 			</div>
 			<div class="event-ro row">
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
-					<div class="event-box">
-						<img src="/images/events/image_08.jpg" alt="">
-						<h4 th:text="${project.name}"></h4>
+<!-- 					onClick="@{/projects/{project.id}}" -->
+					<a th:href="@{'/projects/'+${project.id}}" >
+						<div class="card event-box">
+							<img class="card-img-top" src="/images/events/image_08.jpg" alt="">
 
-						<p class="raises">
-							<span th:text="${project.currentFund}"></span>
-							/
-							<span th:text="${project.targetFund}"> </span>
-						</p>
-						<p class="desic" th:text="${project.description}"></p>
-						<button class="btn btn-success btn-sm">Donate Now</button>
-					</div>
+							<h4 th:text="${project.name}"></h4>
+							<p class="raises">
+								<span th:text="${project.currentFund}"></span> / <span th:text="${project.targetFund}">
+								</span>
+							</p>
+							<p class="desic" th:text="${project.description}"></p>
+							<button class="btn btn-success btn-sm">Donate Now</button>
+						</div>
+					</a>
 				</div>
 			</div>
 		</div>
 
-			<div class="d-flex justify-content-center pagination p1">
-				<a th:if="${projectPage.totalPages > 0}" class="d-inline-flex"
-					th:each="pageNumber : ${pageNumbers}" th:href="@{/projects(size=${projectPage.size}, page=${pageNumber})}"
-					th:text=${pageNumber} th:class="${pageNumber==projectPage.number + 1} ? active">
-				</a>
-			</div>
-			
+		<div class="d-flex justify-content-center pagination p1">
+			<a th:if="${projectPage.totalPages > 0}" class="d-inline-flex"
+				th:each="pageNumber : ${pageNumbers}"
+				th:href="@{/projects(size=${projectPage.size}, page=${pageNumber})}" th:text=${pageNumber}
+				th:class="${pageNumber==projectPage.number + 1} ? active"> </a>
+		</div>
+
 	</section>
 
 

@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Project Details</title>
-    <link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
-	<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}" rel="stylesheet">
-    <link rel="shortcut icon" th:href="@{/images/fav.jpg}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Project Details</title>
+<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}"
+	rel="stylesheet">
+<link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	 <div  th:replace="/fragments/header::header">
-	</div>
-	
-	<div class="m-3 text-center">
-		<h1 class="font-weight-bold">Child Education in Africa</h1>
-	</div>
-	<div class="row mx-5 mb-5">
-		<div class="pl-2 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-			Lorem Ipsum is simply dummy text of the printing and typesetting industry.  Lorem Ipsum has been the industry's
-		</div>
-		<div class="pr-2 col-sm-12 col-md-12 col-lg-4 col-xl-4 align-items-start">
-			<div class="card">
-				<div class="text-center pt-2 h4">Child Education in Africa</div>
-				<table class="project-info">
-					<tr>
-						<th class="fit">Raised:</th>
-						<td>
-							<div class="text-center">$34,425 / $500,000</div>
-							<div class="progress" style="height: 10px;">
-  								<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="500000"></div>
-							</div>
-						</td>
-					</tr>
-					<tr>
-						<td colspan="2">1000 Donations</td>
-					</tr>
-				</table>
-			</div>
+	<div th:replace="/fragments/header::header"></div>
 
-			<div class="p-3">
-<!-- 				<h3 style="font-weight: bold;"><?=number_format($dprice)?>đ</h3> -->
-				<button class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;">Donate</button>
+	<div th:object=${project}>
+		<div class="m-3 text-center">
+			<h1 th:text="${project.name}" class="font-weight-bold"></h1>
+		</div>
+		<div class="row mx-5 mb-5">
+			<div th:text="${project.description}" class="pl-2 col-sm-12 col-md-12 col-lg-8 col-xl-8"></div>
+			<div class="pr-2 col-sm-12 col-md-12 col-lg-4 col-xl-4 align-items-start">
+				<div class="card">
+					<div class="text-center pt-2 h4">Project Information</div>
+					<table class="project-info">
+						<tr>
+							<th class="fit">Raised:</th>
+							<td>
+								<span th:text="${project.currentFund}" class="text-center"></span> 
+								/
+								<span th:text="${project.targetFund}" class="text-center"></span>
+								<div class="progress" style="height: 10px;">
+									<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="100"
+										aria-valuemin="0" aria-valuemax="500000"></div>
+								</div>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="2">1000 Donations</td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="p-3">
+					<button class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;">Donate</button>
+				</div>
+				<img width="100%" src="/images/events/image_08.jpg" alt="">
 			</div>
-			<img width="100%" src="/images/events/image_08.jpg" alt="">
 		</div>
 	</div>
-	
-	<div th:replace="/fragments/footer::footer">
-    </div>
-    <div th:replace="/fragments/footer::copy">
-    </div>
+
+	<div th:replace="/fragments/footer::footer"></div>
+	<div th:replace="/fragments/footer::copy"></div>
 </body>
 </html>

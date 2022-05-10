@@ -8,7 +8,6 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,12 +37,6 @@ public class ProjectController {
 	public String showAddProject(Model model) {
 		model.addAttribute("project", new Project());
 		return "add-project";
-	}
-	
-	@GetMapping("/detail")
-	public String showProjectDetail() {
-//		model.addAttribute("project", new Project());
-		return "project";
 	}
 
 	@PostMapping("/add")
@@ -105,8 +98,15 @@ public class ProjectController {
               .collect(Collectors.toList());
           model.addAttribute("pageNumbers", pageNumbers);
       }
-
       return "home";
   }
+	
+	@GetMapping("/{id}")
+	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
+//		model.addAttribute("project", new Project());
+		Project project = service.get(id);
+		model.addAttribute("project", project);
+		return "project";
+	}
 	
 }
