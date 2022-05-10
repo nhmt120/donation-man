@@ -79,34 +79,34 @@ public class ProjectController {
 	}
 	
 	//////////// test pagination
-	@GetMapping("")
-  public String showProjectList(
-    Model model, 
-    @RequestParam("page") Optional<Integer> page, 
-    @RequestParam("size") Optional<Integer> size) {
-      int currentPage = page.orElse(1);
-      int pageSize = size.orElse(6);
-
-      Page<Project> projectPage = service.findPaginatedProject(PageRequest.of(currentPage - 1, pageSize));
-
-      model.addAttribute("projectPage", projectPage);
-
-      int totalPages = projectPage.getTotalPages();
-      if (totalPages > 0) {
-          List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-              .boxed()
-              .collect(Collectors.toList());
-          model.addAttribute("pageNumbers", pageNumbers);
-      }
-      return "home";
-  }
-	
-	@GetMapping("/{id}")
-	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
-//		model.addAttribute("project", new Project());
-		Project project = service.get(id);
-		model.addAttribute("project", project);
-		return "project";
-	}
+//	@GetMapping("")
+//  public String showProjectList(
+//    Model model, 
+//    @RequestParam("page") Optional<Integer> page, 
+//    @RequestParam("size") Optional<Integer> size) {
+//      int currentPage = page.orElse(1);
+//      int pageSize = size.orElse(6);
+//
+//      Page<Project> projectPage = service.findPaginatedProject(PageRequest.of(currentPage - 1, pageSize));
+//
+//      model.addAttribute("projectPage", projectPage);
+//
+//      int totalPages = projectPage.getTotalPages();
+//      if (totalPages > 0) {
+//          List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
+//              .boxed()
+//              .collect(Collectors.toList());
+//          model.addAttribute("pageNumbers", pageNumbers);
+//      }
+//      return "home";
+//  }
+//	
+//	@GetMapping("/{id}")
+//	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
+////		model.addAttribute("project", new Project());
+//		Project project = service.get(id);
+//		model.addAttribute("project", project);
+//		return "project";
+//	}
 	
 }
