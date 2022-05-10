@@ -1,8 +1,13 @@
 package tdtu.spring.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Project")
@@ -24,6 +29,14 @@ public class Project {
 	@ColumnDefault("0")
 	private int currentFund = 0;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties("donation")
+	private List<Donation> donationList = new ArrayList<>();
+
+	public void addDonation(Donation donation) {
+    this.donationList.add(donation);
+	}
+	
 	public Project() {
 		super();
 	}
@@ -73,6 +86,14 @@ public class Project {
 
 	public void setCurrentFund(int currentFund) {
 		this.currentFund = currentFund;
+	}
+
+	public List<Donation> getDonationList() {
+		return donationList;
+	}
+
+	public void setDonationList(List<Donation> donationList) {
+		this.donationList = donationList;
 	}
 
 	@Override

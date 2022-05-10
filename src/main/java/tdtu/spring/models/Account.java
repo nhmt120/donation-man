@@ -1,20 +1,25 @@
 package tdtu.spring.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.ColumnDefault;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "Account")
 public class Account {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
 	@Column(nullable = false)
 	private String name;
-	
+
 	@Column(nullable = false)
 	private String username;
 
@@ -27,10 +32,18 @@ public class Account {
 	@ColumnDefault("0")
 	private int balance = 0;
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account", cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties("donation")
+	private List<Donation> donationList = new ArrayList<>();
+
+	public void addDonation(Donation donation) {
+    this.donationList.add(donation);
+	}
+	
 	public Account() {
 		super();
 	}
-	
+
 	public Account(String name, String username, String password, String role) {
 		super();
 		this.name = name;
@@ -38,7 +51,7 @@ public class Account {
 		this.password = password;
 		this.role = role;
 	}
-	
+
 	public Account(String name, String username, String password) {
 		super();
 		this.name = name;
@@ -93,4 +106,19 @@ public class Account {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
+
+	public List<Donation> getDonationList() {
+		return donationList;
+	}
+
+	public void setDonationList(List<Donation> donationList) {
+		this.donationList = donationList;
+	}
+
+	@Override
+	public String toString() {
+		return "Account [id=" + id + ", name=" + name + ", username=" + username + ", password=" + password + ", role="
+				+ role + ", balance=" + balance + ", donationList=" + donationList + "]";
+	}
+
 }

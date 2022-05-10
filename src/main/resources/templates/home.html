@@ -93,8 +93,8 @@
 			</div>
 			<div class="event-ro row">
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
-<!-- 					onClick="@{/projects/{project.id}}" -->
-					<a th:href="@{'/projects/'+${project.id}}" >
+					<!-- 					onClick="@{/projects/{project.id}}" -->
+					<a th:href="@{'/projects/'+${project.id}}">
 						<div class="card event-box">
 							<img class="card-img-top" src="/images/events/image_08.jpg" alt="">
 
@@ -113,8 +113,7 @@
 
 		<div class="d-flex justify-content-center pagination p1">
 			<a th:if="${projectPage.totalPages > 0}" class="d-inline-flex"
-				th:each="pageNumber : ${pageNumbers}"
-				th:href="@{/projects(size=${projectPage.size}, page=${pageNumber})}" th:text=${pageNumber}
+				th:each="pageNumber : ${pageNumbers}" th:href="@{/(page=${pageNumber})}" th:text=${pageNumber}
 				th:class="${pageNumber==projectPage.number + 1} ? active"> </a>
 		</div>
 

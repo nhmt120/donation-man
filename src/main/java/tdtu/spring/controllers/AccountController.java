@@ -36,8 +36,9 @@ public class AccountController {
 		String name = account.getName();
 		String username = account.getUsername();
 		String password = account.getPassword();
+		String role = account.getRole();
 
-		Account newAccount = new Account(name, username, password);
+		Account newAccount = new Account(name, username, password, role);
 		service.save(newAccount);
 		return "add-account";
 	}
