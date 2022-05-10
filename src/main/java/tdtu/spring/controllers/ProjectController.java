@@ -28,11 +28,11 @@ public class ProjectController {
 	@Autowired
 	private ProjectService service;
 
-	@GetMapping("")
-	public String showProjectList(Model model) {
-		model.addAttribute("projects", service.findAll());
-		return "home";
-	}
+//	@GetMapping("")
+//	public String showProjectList(Model model) {
+//		model.addAttribute("projects", service.findAll());
+//		return "home";
+//	}
 
 	@GetMapping("/add")
 	public String showAddProject(Model model) {
@@ -86,13 +86,13 @@ public class ProjectController {
 	}
 	
 	//////////// test pagination
-	@GetMapping("/project-list")
-  public String listProjects(
+	@GetMapping("")
+  public String showProjectList(
     Model model, 
     @RequestParam("page") Optional<Integer> page, 
     @RequestParam("size") Optional<Integer> size) {
       int currentPage = page.orElse(1);
-      int pageSize = size.orElse(3);
+      int pageSize = size.orElse(6);
 
       Page<Project> projectPage = service.findPaginatedProject(PageRequest.of(currentPage - 1, pageSize));
 
