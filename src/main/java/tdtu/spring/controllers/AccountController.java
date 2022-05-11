@@ -40,7 +40,7 @@ public class AccountController {
 
 		Account newAccount = new Account(name, username, password, role);
 		service.save(newAccount);
-		return "add-account";
+		return "redirect:/login";
 	}
 
 //	@GetMapping("/update/{id}")

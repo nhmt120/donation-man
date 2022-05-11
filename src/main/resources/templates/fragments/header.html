@@ -19,7 +19,7 @@
         <div class="container">
             <div class="row nav-row">
                 <div class="col-lg-3 col-md-12 logo">
-                    <a href="index.html">
+                    <a th:href="@{/}">
                         <img src="/images/logo-tdt.png" alt="" style="width:110px;height:50px;">
                         <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-lg-none  small-menu fa-bars"></i></a>
                     </a>
@@ -29,11 +29,11 @@
 
                             <ul class="navbad">
                                 <li class="nav-item active">
-                                    <a class="nav-link" href="index.html">Home
+                                    <a class="nav-link" th:href="@{/}">Home
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="about_us.html">About Us</a>
+                                    <a class="nav-link" href="about_us.html">Projects</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" href="services.html">Services</a>
