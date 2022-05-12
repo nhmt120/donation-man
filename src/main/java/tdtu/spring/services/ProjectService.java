@@ -45,6 +45,10 @@ public class ProjectService {
 		repo.updateById(project.getId(), project.getName(), project.getDescription(), project.getTargetFund(), project.getCurrentFund());
 	}
 	
+	public void updateCurrentFund(int id, int fund) {
+		repo.updateCurrentFundById(id, fund);
+	}
+	
 	public Page<Project> findPaginatedProject(Pageable pageable) {
 		List<Project> projects = findAll();
 		

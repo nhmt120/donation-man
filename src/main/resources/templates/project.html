@@ -34,7 +34,7 @@
 								/
 								<span th:text="${project.targetFund}" class="text-center"></span>
 								<div class="progress" style="height: 10px;">
-									<div class="progress-bar" role="progressbar" style="width: 75%" aria-valuenow="100"
+									<div class="progress-bar" role="progressbar" th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%'" aria-valuenow="100"
 										aria-valuemin="0" aria-valuemax="500000"></div>
 								</div>
 							</td>
@@ -46,7 +46,7 @@
 				</div>
 
 				<div class="p-3">
-					<button class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;">Donate</button>
+					<button type="button" class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;" data-toggle="modal" data-target="#donateModal">Donate</button>
 				</div>
 				<img width="100%" src="/images/events/image_08.jpg" alt="">
 			</div>
@@ -55,5 +55,48 @@
 
 	<div th:replace="/fragments/footer::footer"></div>
 	<div th:replace="/fragments/footer::copy"></div>
+	
+	<div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title" id="donateModalLabel">Make a donation</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			        	<span aria-hidden="true">&times;</span>
+			        </button>
+				</div>
+				<div class="modal-body">
+					<form class="form-donation" th:action="@{'/donations/add/'+${project.id}}" th:object="${donation}" method="post">
+						<h3 th:text="${project.name}" class="title-style-1 text-center">
+							<span class="title-under"></span>
+						</h3>
+						
+						<br>
+
+						<div class="row">
+							<div class="form-group col-md-12 ">
+								<input type="text" class="form-control" th:field="*{amount}" id="amount" name="amount"
+									placeholder="Amount">
+							</div>
+						</div>
+
+						<div class="row">
+
+							<div class="form-group col-md-12">
+								<button type="submit" class="btn btn-success">DONATE NOW</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+	$('#donateModal').modal('toggle')</script>
 </body>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/scroll-fixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
 </html>

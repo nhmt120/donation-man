@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tdtu.spring.models.Donation;
 import tdtu.spring.models.Project;
 import tdtu.spring.services.ProjectService;
 
@@ -47,6 +48,7 @@ public class HomeController {
 	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
 		Project project = service.get(id);
 		model.addAttribute("project", project);
+		model.addAttribute("donation", new Donation());
 		return "project";
 	}
 

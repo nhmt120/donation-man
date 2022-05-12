@@ -71,5 +71,4 @@ class DonationManApplicationTests {
 		accountRepository.deleteAll();
 		projectRepository.deleteAll();
 	}
-
 }

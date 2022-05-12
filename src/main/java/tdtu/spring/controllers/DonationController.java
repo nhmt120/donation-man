@@ -1,13 +1,16 @@
 package tdtu.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.spring.models.Account;
 import tdtu.spring.models.Donation;
@@ -19,6 +22,9 @@ import tdtu.spring.services.ProjectService;
 @Controller
 @RequestMapping("/donations")
 public class DonationController {
+	
+	@Autowired
+	private Account account;
 
 	@Autowired
 	private DonationService donationService;
@@ -41,22 +47,48 @@ public class DonationController {
 //		return "add-donation";
 //	}
 //
-	@PostMapping("/add")
-	public String saveDonation(@ModelAttribute("donation") Donation donation) {
+	@PostMapping("/add/{projectId}")
+	public String saveDonation(@ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 
 		int amount = donation.getAmount();
-//	int accountId = donation.getAccount().getId();
-//	int projectId = donation.getProject().getId();
+//		int accountId = account.getId();
 
-		Project project = projectService.get(2); // set 2 for testing
-		Account account = accountService.get(2); // set 2 for testing
+		Project project = projectService.get(projectId); // set 2 for testing
+		Account account = accountService.get(28); // set 2 for testing
 
 		Donation newDonation = new Donation(amount);
 		newDonation.setProject(project);
 		newDonation.setAccount(account);
 
 		donationService.save(newDonation);
-		return "redirect:/";
+		int newfund = donationService.sumAmount(projectId);
+		projectService.updateCurrentFund(projectId, newfund);
+		
+		return "redirect:/projects/" + projectId;
 	}
+	
+//	@PostMapping("/add/{projectId}")
+//	@ResponseBody
+//	public String saveDonation(@PathVariable(name = "projectId") int projectId) {
+//		
+//		String accountId = account.getName();
+//
+////		int amount = donation.getAmount();
+////
+////		Project project = projectService.get(projectId); // set 2 for testing
+////		Account account = accountService.get(2); // set 2 for testing
+////
+////		Donation newDonation = new Donation(amount);
+////		newDonation.setProject(project);
+////		newDonation.setAccount(account);
+////
+////		donationService.save(newDonation);
+//		return accountId;
+//	}
+	
+//	@ModelAttribute("account")
+//	public Account getUser() {
+//		return account;
+//	}
 
 }

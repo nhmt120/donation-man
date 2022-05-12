@@ -93,7 +93,6 @@
 			</div>
 			<div class="event-ro row">
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
-					<!-- 					onClick="@{/projects/{project.id}}" -->
 					<a th:href="@{'/projects/'+${project.id}}">
 						<div class="card event-box">
 							<img class="card-img-top" src="/images/events/image_08.jpg" alt="">
@@ -104,7 +103,7 @@
 								</span>
 							</p>
 							<p class="desic" th:text="${project.description}"></p>
-							<button class="btn btn-success btn-sm">Donate Now</button>
+							<button class="btn btn-success btn-sm">Detail</button>
 						</div>
 					</a>
 				</div>

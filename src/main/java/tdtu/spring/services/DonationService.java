@@ -32,5 +32,9 @@ public class DonationService {
 	public Donation get(int id) {
 		return repo.findById(id).get();
 	}
+	
+	public int sumAmount(int id) {
+		return repo.getTotalAmountByProjectId(id);
+	}
 
 }

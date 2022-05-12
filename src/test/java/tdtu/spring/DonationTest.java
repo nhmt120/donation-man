@@ -39,4 +39,10 @@ public class DonationTest extends DonationManApplicationTests {
 
 		assertEquals(2, donations.size());
 	}
+	
+	@Test
+	void getSumAmount() {
+		int amount = donationRepository.getTotalAmountByProjectId(44);
+		assertEquals(2, amount);
+	}
 }
