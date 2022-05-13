@@ -24,5 +24,9 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
     
     @Modifying
     @Query(value = "UPDATE Project p SET p.current_fund = ?2 WHERE p.id = ?1", nativeQuery = true)
-    void updateCurrentFundById(int id, int current_fund); 
+    void updateCurrentFundById(int id, int current_fund);
+    
+    @Modifying
+    @Query(value = "UPDATE Project p SET p.donation_num = ?2 WHERE p.id = ?1", nativeQuery = true)
+    void updateDonationNumById(int id, int donation_num);
 }

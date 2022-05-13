@@ -49,6 +49,10 @@ public class ProjectService {
 		repo.updateCurrentFundById(id, fund);
 	}
 	
+	public void updateDonationNum(int id, int dnum) {
+		repo.updateDonationNumById(id, dnum);
+	}
+	
 	public Page<Project> findPaginatedProject(Pageable pageable) {
 		List<Project> projects = findAll();
 		

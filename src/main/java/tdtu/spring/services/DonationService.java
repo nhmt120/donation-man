@@ -36,5 +36,9 @@ public class DonationService {
 	public int sumAmount(int id) {
 		return repo.getTotalAmountByProjectId(id);
 	}
+	
+	public int countDonation(int id) {
+		return repo.countByProjectId(id);
+	}
 
 }

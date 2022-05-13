@@ -40,7 +40,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="2">1000 Donations</td>
+							<td th:text="${project.donationNum} + ' Donations'" colspan="2"></td>
 						</tr>
 					</table>
 				</div>
@@ -98,5 +98,6 @@
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>
 <script th:src="@{/plugins/scroll-fixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/plugins/slider/js/owl.carousel.min.js}"></script>
 <script th:src="@{/js/script.js}"></script>
 </html>

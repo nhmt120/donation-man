@@ -62,33 +62,11 @@ public class DonationController {
 
 		donationService.save(newDonation);
 		int newfund = donationService.sumAmount(projectId);
+		int dnum = donationService.countDonation(projectId);
 		projectService.updateCurrentFund(projectId, newfund);
+		projectService.updateDonationNum(projectId, dnum);
 		
 		return "redirect:/projects/" + projectId;
 	}
-	
-//	@PostMapping("/add/{projectId}")
-//	@ResponseBody
-//	public String saveDonation(@PathVariable(name = "projectId") int projectId) {
-//		
-//		String accountId = account.getName();
-//
-////		int amount = donation.getAmount();
-////
-////		Project project = projectService.get(projectId); // set 2 for testing
-////		Account account = accountService.get(2); // set 2 for testing
-////
-////		Donation newDonation = new Donation(amount);
-////		newDonation.setProject(project);
-////		newDonation.setAccount(account);
-////
-////		donationService.save(newDonation);
-//		return accountId;
-//	}
-	
-//	@ModelAttribute("account")
-//	public Account getUser() {
-//		return account;
-//	}
 
 }

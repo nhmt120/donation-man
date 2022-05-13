@@ -28,6 +28,9 @@ public class Project {
 
 	@ColumnDefault("0")
 	private int currentFund = 0;
+	
+	@ColumnDefault("0")
+	private int donationNum = 0;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 //	@JsonIgnoreProperties("donation")
@@ -86,6 +89,14 @@ public class Project {
 
 	public void setCurrentFund(int currentFund) {
 		this.currentFund = currentFund;
+	}
+
+	public int getDonationNum() {
+		return donationNum;
+	}
+
+	public void setDonationNum(int donationNum) {
+		this.donationNum = donationNum;
 	}
 
 	public List<Donation> getDonationList() {
