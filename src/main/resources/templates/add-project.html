@@ -1,11 +1,21 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="utf-8" />
-<title>Add Project</title>
-<!--       <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/> -->
+	<meta charset="utf-8" />
+	<title>Add Project</title>
+	<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+	<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}" rel="stylesheet">
+    <link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
+    <link rel="stylesheet" th:href="@{/css/animate.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
+	<div th:replace="/fragments/header::header"></div>
+	
 	<h1>Add a new Project:</h1>
 	<form th:action="@{add}" th:object="${project}" method="post">
 		Name:
@@ -22,5 +32,14 @@
 		<br>
 		<input type="submit" value="Add" />
 	</form>
+	
+	<div th:replace="/fragments/footer::footer"></div>
+	<div th:replace="/fragments/footer::copy"></div>
 </body>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/scroll-fixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/plugins/slider/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
 </html>

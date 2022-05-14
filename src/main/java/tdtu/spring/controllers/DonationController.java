@@ -53,17 +53,17 @@ public class DonationController {
 	@PostMapping("/add/{projectId}")
 	public String saveDonation(@ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 
-		int amount = donation.getAmount();
-//		int accountId = userDetails.getId();
-		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		int amount = donation.getAmount();
+		int accountId = user.getUserId();
 		
 		System.out.println("==============================================================");
 		System.out.println(user.getUserId());
 		System.out.println("==============================================================");
 		
 		Project project = projectService.get(projectId);
-		Account account = accountService.get(2);
+		Account account = accountService.get(accountId);
 
 		Donation newDonation = new Donation(amount);
 		newDonation.setProject(project);
