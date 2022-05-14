@@ -1,10 +1,10 @@
 package tdtu.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -51,7 +51,7 @@ public class DonationController {
 	public String saveDonation(@ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 
 		int amount = donation.getAmount();
-//		int accountId = account.getId();
+//		int accountId = userDetails.getId();
 
 		Project project = projectService.get(projectId);
 		Account account = accountService.get(1);

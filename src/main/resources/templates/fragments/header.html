@@ -43,12 +43,41 @@
                                     <a class="nav-link" href="gallery.html">Gallery</a>
                                 </li>
 
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/login}">Login</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/accounts/add}">Register</a>
-                                </li>
+<!-- 								<span th:switch="${session}"> -->
+<!-- 									<span th:case=null> -->
+<!-- 										<li class="nav-item"> -->
+<!-- 		                                    <a class="nav-link" th:href="@{/login}">Login</a> -->
+<!-- 		                                </li> -->
+<!-- 		                                <li class="nav-item"> -->
+<!-- 		                                    <a class="nav-link" th:href="@{/accounts/add}">Register</a> -->
+<!-- 		                                </li> -->
+<!-- 									</span> -->
+									
+<!-- 	                                <li th:case="*" class="nav-item"> -->
+<!-- 		                                <form th:action="@{/logout}" method="post"> -->
+<!-- 										  <input type="hidden" value="Sign Out"/> -->
+<!-- 										  <button type="submit" class="btn-light nav-link">Logout</button> -->
+<!-- 										</form> -->
+	                                
+<!-- 	                                </li> -->
+<!-- 								</span> -->
+
+								<span sec:authorize="isAnonymous()">
+									<li class="nav-item">
+		                            	<a class="nav-link" th:href="@{/login}">Login</a>
+		                            </li>
+		                            <li class="nav-item">
+		                                <a class="nav-link" th:href="@{/accounts/add}">Register</a>
+		                            </li>
+								</span>
+								<span sec:authorize="isAuthenticated()">
+									<li class="nav-item">
+		                                <form th:action="@{/logout}" method="post">
+										  <input type="hidden" value="Sign Out"/>
+										  <button type="submit" class="btn-light nav-link">Logout</button>
+										</form>
+	                                </li>
+								</span>
                             </ul>
                 </div>
             </div>

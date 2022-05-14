@@ -307,24 +307,25 @@ header {
     @media screen and (max-width: 991px) {
       header .nav-col .navbad {
         width: 100%; } }
-    header .nav-col .navbad li {
+    header .nav-col .navbad .nav-item {
       padding: 15px 15px;
       font-weight: 700;
       font-size: .9rem;
       float: left; }
       @media screen and (max-width: 1005px) {
-        header .nav-col .navbad li {
+        header .nav-col .navbad .nav-item {
           padding: 15px 12px; } }
       @media screen and (max-width: 991px) {
-        header .nav-col .navbad li {
+        header .nav-col .navbad .nav-item {
           float: none;
           width: 100%;
           padding: 10px; } }
-      header .nav-col .navbad li a {
+      header .nav-col .navbad .nav-item .nav-link {
         color: #686968 !important;
         border: 1px solid #CCC;
-        border-radius: 50px; }
-        header .nav-col .navbad li a:hover {
+        border-radius: 50px;
+        font-weight: bold; }
+        header .nav-col .navbad .nav-item .nav-link:hover {
           background-color: #3cc88f;
           color: #fff !important; }
     header .nav-col .navbad .nav-btn {
@@ -523,7 +524,7 @@ header {
     padding: 30px 10px; } }
 .events .event-ro .event-box {
   text-align: center;
-  margin-bottom: 20px; 
+  margin-bottom: 50px; 
 /*   padding: 0px; */
   }
 
