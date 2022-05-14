@@ -25,7 +25,7 @@ public class HomeController {
 	@Autowired
 	private ProjectService service;
 
-	@GetMapping("")
+	@GetMapping("/")
 	public String showProjectList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 		
@@ -56,4 +56,12 @@ public class HomeController {
 	public String showLogin() {
 		return "login";
 	}
+	
+  @GetMapping("/hello")
+  public String hello() {
+      return "hello";
+  }
+
+	
+	
 }

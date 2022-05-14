@@ -1,11 +1,11 @@
 package tdtu.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -18,6 +18,8 @@ public class AccountController {
 
 	@Autowired
 	private AccountService service;
+  @Autowired
+  PasswordEncoder passwordEncoder;
 
 //	@GetMapping("")
 //	public String showAccountList(Model model) {
@@ -35,11 +37,14 @@ public class AccountController {
 	public String saveAccount(@ModelAttribute("account") Account account) {
 		String name = account.getName();
 		String username = account.getUsername();
-		String password = account.getPassword();
+		String password = passwordEncoder.encode(account.getPassword());
 		String role = account.getRole();
 
 		Account newAccount = new Account(name, username, password, role);
 		service.save(newAccount);
+		
+		System.out.println(newAccount);
+		
 		return "redirect:/login";
 	}
 

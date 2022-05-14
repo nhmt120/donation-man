@@ -22,9 +22,9 @@ import tdtu.spring.services.ProjectService;
 @Controller
 @RequestMapping("/donations")
 public class DonationController {
-	
-	@Autowired
-	private Account account;
+//	
+//	@Autowired
+//	private Account account;
 
 	@Autowired
 	private DonationService donationService;
@@ -53,9 +53,11 @@ public class DonationController {
 		int amount = donation.getAmount();
 //		int accountId = account.getId();
 
-		Project project = projectService.get(projectId); // set 2 for testing
-		Account account = accountService.get(28); // set 2 for testing
-
+		Project project = projectService.get(projectId);
+		Account account = accountService.get(1);
+		System.out.println("==============================================================");
+		System.out.println(amount);
+		System.out.println("==============================================================");
 		Donation newDonation = new Donation(amount);
 		newDonation.setProject(project);
 		newDonation.setAccount(account);

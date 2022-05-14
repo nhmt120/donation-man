@@ -8,9 +8,9 @@ import tdtu.spring.models.Account;
 @Configuration
 public class ApplicationConfig {
 	
-	@Bean
-	public Account account() {
-		return new Account("Minh", "vince", "123");
-	}
+//	@Bean
+//	public Account account() {
+//		return new Account("Minh", "vince", "123");
+//	}
 	
 }
