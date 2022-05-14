@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import tdtu.spring.models.Account;
+import tdtu.spring.models.CustomUser;
 import tdtu.spring.repositories.AccountRepository;
 
 @Service
@@ -51,8 +52,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
 		grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
 
-		UserDetails userDetails = (UserDetails) new User(account.getUsername(), //
-				account.getPassword(), grantList);
+		UserDetails userDetails = (UserDetails) new CustomUser(account.getUsername(), //
+				account.getPassword(), grantList, account.getId());
 
 		return userDetails;
 

@@ -2,6 +2,8 @@ package tdtu.spring.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import tdtu.spring.models.Account;
+import tdtu.spring.models.CustomUser;
 import tdtu.spring.models.Donation;
 import tdtu.spring.models.Project;
 import tdtu.spring.services.AccountService;
@@ -52,12 +55,16 @@ public class DonationController {
 
 		int amount = donation.getAmount();
 //		int accountId = userDetails.getId();
-
+		
+		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		
+		System.out.println("==============================================================");
+		System.out.println(user.getUserId());
+		System.out.println("==============================================================");
+		
 		Project project = projectService.get(projectId);
-		Account account = accountService.get(1);
-		System.out.println("==============================================================");
-		System.out.println(amount);
-		System.out.println("==============================================================");
+		Account account = accountService.get(2);
+
 		Donation newDonation = new Donation(amount);
 		newDonation.setProject(project);
 		newDonation.setAccount(account);
