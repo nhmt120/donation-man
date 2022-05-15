@@ -27,7 +27,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	@Modifying
 	@Transactional
 	@Query("update Account a set a.balance = ?2 where a.id = ?1")
-	void updateBalanceById(int id, double newBalance);
+	void updateBalanceById(int id, int newBalance);
 	
 	
 }

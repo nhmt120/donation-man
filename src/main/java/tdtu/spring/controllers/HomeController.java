@@ -64,19 +64,19 @@ public class HomeController {
 		return "login";
 	}
 
-	@GetMapping("/account")
-	public String showAccountDetail(Model model) {
-		
-
-		
-		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		int accountId = user.getUserId();
-		Account account = accountService.get(accountId);
-		List<Project> projects = projectService.findByAccountId(accountId);
-		System.out.println(projects);
-		model.addAttribute("account", account);
-		
-		return "account";
-	}
+//	@GetMapping("/account")
+//	public String showAccountDetail(Model model) {
+//		
+//
+//		
+//		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//		int accountId = user.getUserId();
+//		Account account = accountService.get(accountId);
+//		List<Project> projects = projectService.findByAccountId(accountId);
+//		System.out.println(projects);
+//		model.addAttribute("account", account);
+//		
+//		return "account";
+//	}
 
 }
