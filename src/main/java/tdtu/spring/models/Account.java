@@ -41,9 +41,9 @@ public class Account {
 	private List<Donation> projectList = new ArrayList<>();
 
 	public void addDonation(Donation donation) {
-    this.donationList.add(donation);
+		this.donationList.add(donation);
 	}
-	
+
 	public Account() {
 		super();
 	}
@@ -69,6 +69,14 @@ public class Account {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Donation> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<Donation> projectList) {
+		this.projectList = projectList;
 	}
 
 	public String getName() {

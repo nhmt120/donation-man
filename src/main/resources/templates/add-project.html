@@ -1,38 +1,44 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-	<meta charset="utf-8" />
-	<title>Add Project</title>
-	<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
-	<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}" rel="stylesheet">
-    <link rel="shortcut icon" th:href="@{/images/fav.jpg}">
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <link rel="stylesheet" th:href="@{/css/all.min.css}">
-    <link rel="stylesheet" th:href="@{/css/animate.css}">
-    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
-    <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<meta charset="utf-8" />
+<title>Add Project</title>
+<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}"
+	rel="stylesheet">
+<link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
 	<div th:replace="/fragments/header::header"></div>
-	
-	<h1>Add a new Project:</h1>
-	<form th:action="@{add}" th:object="${project}" method="post">
-		Name:
-		<input type="text" th:field="*{name}" />
-		<br>
-		Description:
-		<input type="text" th:field="*{description}" />
-		<br>
-		Target Fund:
-		<input type="text" th:field="*{targetFund}" />
-		<br>
-		Current Fund:
-		<input disabled type="text" th:field="*{currentFund}" />
-		<br>
-		<input type="submit" value="Add" />
-	</form>
-	
+	<br>
+	<!-- 	<h1>Add a new Project:</h1> -->
+	<div class="login-container">
+		<div class="text-center">
+			<h1>Add New Project</h1>
+		</div>
+		<form class="form-edit container" th:action="@{add}" th:object="${project}" method="post" enctype="multipart/form-data">
+			<div class="text-center"></div>
+			Name:
+			<input type="text" th:field="*{name}" required/>
+			<br>
+			Description:
+			<input type="text" th:field="*{description}" required/>
+			<br>
+			Target Fund:
+			<input type="text" th:field="*{targetFund}" required/>
+			<br>
+			Image:			    
+			<input type="file" name="uploadImage" accept="image/png, image/jpeg" />
+
+			<input type="submit" value="Add" />
+		</form>
+	</div>
 	<div th:replace="/fragments/footer::footer"></div>
 	<div th:replace="/fragments/footer::copy"></div>
 </body>

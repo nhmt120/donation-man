@@ -95,7 +95,7 @@
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
 					<a th:href="@{'/projects/'+${project.id}}">
 						<div class="card event-box">
-							<img class="card-img-top" src="/images/events/image_08.jpg" alt="">
+							<img class="card-img-top" th:src="${project.image}" alt="">
 
 							<h4 th:text="${project.name}"></h4>
 							<p class="raises">

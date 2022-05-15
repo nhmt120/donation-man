@@ -11,12 +11,14 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import tdtu.spring.models.Account;
 import tdtu.spring.models.CustomUser;
@@ -60,16 +62,17 @@ public class ProjectController {
 	}
 
 	@PostMapping("/add")
-	public String saveProject(@ModelAttribute("project") Project project) {
+	public String saveProject(@ModelAttribute("project") Project project, @RequestParam("uploadImage") MultipartFile multipartFile) {
 
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // get logged in user
 		
 		String name = project.getName();
 		String description = project.getDescription();
 		int targetFund = project.getTargetFund();
+		String image = "/images/events/" + StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		Account account = accountService.get(user.getUserId());
 		
-		Project newProject = new Project(name, description, targetFund, account);
+		Project newProject = new Project(name, description, targetFund, account, image);
 		projectService.save(newProject);
 		return "redirect:/";
 	}

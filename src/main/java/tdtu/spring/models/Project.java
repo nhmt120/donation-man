@@ -23,28 +23,49 @@ public class Project {
 	@Column(nullable = false)
 	private String description;
 
+	@Column(name = "image", columnDefinition = "varchar(255) default '/images/events/image_01.jpg'")
+	private String image = "/images/events/image_01.jpg";
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	@Column(nullable = false)
 	private int targetFund;
 
 	@ColumnDefault("0")
 	private int currentFund = 0;
-	
+
 	@ColumnDefault("0")
 	private int donationNum = 0;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 //	@JsonIgnoreProperties("donation")
 	private List<Donation> donationList = new ArrayList<>();
-	
-	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//EAGER)
-	@JoinColumn(name = "account_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)) //insertable = false, 
+
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY) // EAGER)
+	@JoinColumn(name = "account_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)) // insertable
+																																																												// =
+																																																												// false,
 //	@JsonIgnoreProperties("donationList")
 	private Account account;
 
 	public void addDonation(Donation donation) {
-    this.donationList.add(donation);
+		this.donationList.add(donation);
 	}
-	
+
 	public Project() {
 		super();
 	}
@@ -55,15 +76,15 @@ public class Project {
 		this.description = description;
 		this.targetFund = targetFund;
 	}
-	
-	public Project(String name, String description, int targetFund, Account account) {
+
+	public Project(String name, String description, int targetFund, Account account, String image) {
 		super();
 		this.name = name;
 		this.description = description;
 		this.targetFund = targetFund;
 		this.account = account;
+		this.image = image;
 	}
-
 
 	public int getId() {
 		return id;
