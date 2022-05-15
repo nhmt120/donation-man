@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import tdtu.spring.models.Account;
+import tdtu.spring.models.Project;
 
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Integer> {
@@ -27,4 +28,6 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	@Transactional
 	@Query("update Account a set a.balance = ?2 where a.id = ?1")
 	void updateBalanceById(int id, double newBalance);
+	
+	
 }

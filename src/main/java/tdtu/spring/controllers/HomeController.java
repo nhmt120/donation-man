@@ -28,14 +28,14 @@ public class HomeController {
 
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	private AccountService accountService;
 
 	@GetMapping("/")
 	public String showProjectList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
-		
+
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(6);
 
@@ -63,21 +63,20 @@ public class HomeController {
 	public String showLogin() {
 		return "login";
 	}
-	
+
 	@GetMapping("/account")
 	public String showAccountDetail(Model model) {
 		
+
+		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
 		int accountId = user.getUserId();
-		
 		Account account = accountService.get(accountId);
-		
+		List<Project> projects = projectService.findByAccountId(accountId);
+		System.out.println(projects);
 		model.addAttribute("account", account);
 		
 		return "account";
 	}
 
-	
-	
 }

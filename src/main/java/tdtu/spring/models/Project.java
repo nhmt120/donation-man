@@ -35,6 +35,11 @@ public class Project {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "project", cascade = CascadeType.ALL)
 //	@JsonIgnoreProperties("donation")
 	private List<Donation> donationList = new ArrayList<>();
+	
+	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)//EAGER)
+	@JoinColumn(name = "account_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)) //insertable = false, 
+//	@JsonIgnoreProperties("donationList")
+	private Account account;
 
 	public void addDonation(Donation donation) {
     this.donationList.add(donation);
@@ -50,6 +55,15 @@ public class Project {
 		this.description = description;
 		this.targetFund = targetFund;
 	}
+	
+	public Project(String name, String description, int targetFund, Account account) {
+		super();
+		this.name = name;
+		this.description = description;
+		this.targetFund = targetFund;
+		this.account = account;
+	}
+
 
 	public int getId() {
 		return id;

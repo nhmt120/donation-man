@@ -29,6 +29,10 @@ public class ProjectService {
 		return repo.findAll();
 	}
 
+	public List<Project> findByAccountId(int id) {
+		return repo.findByAccountId(id);
+	}
+
 	public Project save(Project project) {
 		return repo.save(project);
 	}

@@ -7,6 +7,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 
 public class CustomUser extends User {
+		// to retrieve logged in Account ID from Spring Security Settings
 
     private final int userId;
 
@@ -23,6 +24,5 @@ public class CustomUser extends User {
 
 		public int getUserId() {
 			return userId;
-		}
-    
+		}   
 }

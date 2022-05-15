@@ -36,6 +36,10 @@ public class Account {
 //	@JsonIgnoreProperties("donation")
 	private List<Donation> donationList = new ArrayList<>();
 
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "account", cascade = CascadeType.ALL)
+//	@JsonIgnoreProperties("donation")
+	private List<Donation> projectList = new ArrayList<>();
+
 	public void addDonation(Donation donation) {
     this.donationList.add(donation);
 	}
