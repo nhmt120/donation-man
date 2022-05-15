@@ -53,8 +53,14 @@ public class HomeController {
 
 	@GetMapping("/projects/{id}")
 	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
+		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		int accountId = user.getUserId();
+
+		Account account = accountService.get(accountId);
 		Project project = projectService.get(id);
 		model.addAttribute("project", project);
+		model.addAttribute("account", account);
 		model.addAttribute("donation", new Donation());
 		return "project";
 	}

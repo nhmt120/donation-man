@@ -56,6 +56,9 @@
 	<div th:replace="/fragments/footer::footer"></div>
 	<div th:replace="/fragments/footer::copy"></div>
 	
+<!-- 	<div th:if="${param.insufficient}" th:onload="openModal()"> -->
+<!-- 	</div> -->
+	
 	<div class="modal fade" id="donateModal" tabindex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content">
@@ -67,15 +70,28 @@
 				</div>
 				<div class="modal-body">
 					<form class="form-donation" th:action="@{'/donations/add/'+${project.id}}" th:object="${donation}" method="post">
+						<div class="alert alert-danger" th:if="${param.insufficient}">
+							Insufficient balance.
+						</div>
 						<h3 th:text="${project.name}" class="title-style-1 text-center">
 							<span class="title-under"></span>
 						</h3>
 						
 						<br>
+						
+						<div class="row">
+							<div class="col-md-12">
+								<b>Your balance:</b>
+								<span id="balance" th:text="${account.balance}"></span>
+							</div>
+						</div>
+						
+						<br>
 
 						<div class="row">
 							<div class="form-group col-md-12 ">
-								<input type="text" class="form-control" th:field="*{amount}" id="amount" name="amount"
+								<label for="amount"><b>Enter amount:</b></label>
+								<input type="text" class="form-control" th:field="*{amount}" name="amount"
 									placeholder="Amount">
 							</div>
 						</div>
@@ -83,7 +99,7 @@
 						<div class="row">
 
 							<div class="form-group col-md-12">
-								<button type="submit" class="btn btn-success">DONATE NOW</button>
+								<button onclick="" type="submit" class="btn btn-success">DONATE NOW</button>
 							</div>
 						</div>
 					</form>
@@ -93,6 +109,20 @@
 	</div>
 	
 </body>
+
+<!-- <script th:inline="javascript"> -->
+<!-- //  	var flag = document.getElementById('balance'). -->
+<!-- //  	$(window).on('load', function() { -->
+<!-- //  		if(flag) -->
+<!-- //  	    	$('#donateModal').modal('show'); -->
+<!-- //  	}); -->
+	
+<!-- //  	function openModal() { -->
+<!-- //  		$('#donateModal').modal('show'); -->
+<!-- //  	}; -->
+	
+<!-- //  	document.getElementById("openmodal").innerHTML = openModal(); -->
+<!-- </script> -->
 
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>

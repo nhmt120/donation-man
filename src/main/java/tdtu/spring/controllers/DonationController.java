@@ -1,5 +1,8 @@
 package tdtu.spring.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import tdtu.spring.models.Account;
 import tdtu.spring.models.CustomUser;
@@ -53,6 +57,8 @@ public class DonationController {
 	@PostMapping("/add/{projectId}")
 	public String saveDonation(@ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 
+
+		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
 		int amount = donation.getAmount();
@@ -64,16 +70,25 @@ public class DonationController {
 		
 		Project project = projectService.get(projectId);
 		Account account = accountService.get(accountId);
+		
+		if(account.getBalance() < amount) {
+			Map<String, Object> uriVariables = new HashMap<>();
+			uriVariables.put("insufficient", "true");
+			return "redirect:/projects/" + projectId + "?insufficient=true";
+		}
 
 		Donation newDonation = new Donation(amount);
 		newDonation.setProject(project);
 		newDonation.setAccount(account);
+		
+		int newBalance = account.getBalance() - amount;
 
 		donationService.save(newDonation);
 		int newfund = donationService.sumAmount(projectId);
 		int dnum = donationService.countDonation(projectId);
 		projectService.updateCurrentFund(projectId, newfund);
 		projectService.updateDonationNum(projectId, dnum);
+		accountService.updateBalance(accountId, newBalance);
 		
 		return "redirect:/projects/" + projectId;
 	}
