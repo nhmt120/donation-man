@@ -28,12 +28,12 @@
 			<input type="text" th:field="*{name}" required/>
 			<br>
 			Description:
-			<input type="text" th:field="*{description}" required/>
+			<textarea rows="5" class="form-control" th:field="*{description}" required> </textarea>
 			<br>
 			Target Fund:
 			<input type="text" th:field="*{targetFund}" required/>
 			<br>
-			Image:			    
+			<label>Image:</label>			    
 			<input type="file" name="uploadImage" accept="image/png, image/jpeg" />
 
 			<input type="submit" value="Add" />
