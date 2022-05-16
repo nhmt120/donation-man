@@ -19,6 +19,9 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 	@Query("SELECT p FROM Project p")
 	public List<Project> findAll();
 
+//	@Query("SELECT p FROM Project p WHERE p.is_active = ?1")
+	public List<Project> findByIsActive(boolean isActive);
+
 	@Modifying
 	@Query(value = "UPDATE Project p SET p.name = ?2, p.description = ?3, p.target_fund = ?4, p.current_fund = ?5 WHERE p.id = ?1", nativeQuery = true)
 	void updateById(int id, String name, String description, int target_fund, int current_fund);
@@ -34,8 +37,5 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 	@Modifying
 	@Query(value = "UPDATE Project p SET p.is_active = ?2 WHERE p.id = ?1", nativeQuery = true)
 	void updateIsActiveById(int id, boolean isActive);
-	
-	
-	
 	
 }

@@ -29,6 +29,10 @@ public class ProjectService {
 		return repo.findAll();
 	}
 
+	public List<Project> findActive(boolean isActive) {
+		return repo.findByIsActive(isActive);
+	}
+
 	public List<Project> findByAccountId(int id) {
 		return repo.findByAccountId(id);
 	}
@@ -63,7 +67,7 @@ public class ProjectService {
 	}
 
 	public Page<Project> findPaginatedProject(Pageable pageable) {
-		List<Project> projects = findAll();
+		List<Project> projects = findActive(true);
 
 		int pageSize = pageable.getPageSize();
 		int currentPage = pageable.getPageNumber();
