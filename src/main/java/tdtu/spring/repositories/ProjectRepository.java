@@ -30,4 +30,12 @@ public interface ProjectRepository extends JpaRepository<Project, Integer> {
 	@Modifying
 	@Query(value = "UPDATE Project p SET p.donation_num = ?2 WHERE p.id = ?1", nativeQuery = true)
 	void updateDonationNumById(int id, int donation_num);
+	
+	@Modifying
+	@Query(value = "UPDATE Project p SET p.is_active = ?2 WHERE p.id = ?1", nativeQuery = true)
+	void updateIsActiveById(int id, boolean isActive);
+	
+	
+	
+	
 }

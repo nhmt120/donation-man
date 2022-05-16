@@ -46,34 +46,39 @@ public class ProjectService {
 	}
 
 	public void update(Project project) {
-		repo.updateById(project.getId(), project.getName(), project.getDescription(), project.getTargetFund(), project.getCurrentFund());
+		repo.updateById(project.getId(), project.getName(), project.getDescription(), project.getTargetFund(),
+				project.getCurrentFund());
 	}
-	
+
 	public void updateCurrentFund(int id, int fund) {
 		repo.updateCurrentFundById(id, fund);
 	}
-	
+
 	public void updateDonationNum(int id, int dnum) {
 		repo.updateDonationNumById(id, dnum);
 	}
-	
+
+	public void updateIsActive(int id, boolean isActive) {
+		repo.updateIsActiveById(id, isActive);
+	}
+
 	public Page<Project> findPaginatedProject(Pageable pageable) {
 		List<Project> projects = findAll();
-		
-    int pageSize = pageable.getPageSize();
-    int currentPage = pageable.getPageNumber();
-    int startItem = currentPage * pageSize;
-    List<Project> list;
 
-    if (projects.size() < startItem) {
-        list = Collections.emptyList();
-    } else {
-        int toIndex = Math.min(startItem + pageSize, projects.size());
-        list = projects.subList(startItem, toIndex);
-			}
+		int pageSize = pageable.getPageSize();
+		int currentPage = pageable.getPageNumber();
+		int startItem = currentPage * pageSize;
+		List<Project> list;
 
-			Page<Project> projectPage = new PageImpl<Project>(list, PageRequest.of(currentPage, pageSize), projects.size());
+		if (projects.size() < startItem) {
+			list = Collections.emptyList();
+		} else {
+			int toIndex = Math.min(startItem + pageSize, projects.size());
+			list = projects.subList(startItem, toIndex);
+		}
 
-    return projectPage;
-}
+		Page<Project> projectPage = new PageImpl<Project>(list, PageRequest.of(currentPage, pageSize), projects.size());
+
+		return projectPage;
+	}
 }

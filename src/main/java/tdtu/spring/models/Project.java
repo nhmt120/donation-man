@@ -62,12 +62,23 @@ public class Project {
 //	@JsonIgnoreProperties("donationList")
 	private Account account;
 
+	@ColumnDefault("true")
+	boolean isActive = true;
+
 	public void addDonation(Donation donation) {
 		this.donationList.add(donation);
 	}
 
 	public Project() {
 		super();
+	}
+
+	public boolean isActive() {
+		return isActive;
+	}
+
+	public void setActive(boolean isActive) {
+		this.isActive = isActive;
 	}
 
 	public Project(String name, String description, int targetFund) {
