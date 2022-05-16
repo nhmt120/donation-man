@@ -45,8 +45,7 @@ public class AccountService {
 	}
 
 	public void update(Account account) {
-		repo.updateById(account.getId(), account.getName(), account.getUsername(), account.getPassword(),
-				account.getRole());
+		repo.updateById(account.getId(), account.getName(), account.getUsername(), account.getRole());
 	}
 
 	public void updateBalance(int id, int newBalance) {

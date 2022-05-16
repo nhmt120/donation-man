@@ -19,13 +19,45 @@
 	
 	<div class="container">
 		<h1>Account info</h1>
-		<label>Name:</label>
-		<div th:text="${account.name}"></div>
-		<label>Balance:</label>
-		<div th:text="${account.balance}"></div>
-		<label>Role:</label>
-		<div th:text="${account.role}"></div>
-		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#balanceModal">Add Balance</button>
+		<form th:action="@{/accounts/update}" th:object="${account}" method="post">
+			<input type="hidden" th:field="*{id}" th:value="${account.id}">
+			<table class="mb-3">
+				<tr>
+					<th>Name:</th>
+					<td>
+						<div class="input-group input-group-sm">
+							<input class="form-control"  th:field="*{name}" th:value="${account.name}">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>Username:</th>
+					<td>
+						<div class="input-group input-group-sm">
+							<input class="form-control"  th:field="*{username}" th:value="${account.username}">
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<th>Balance:</th>
+					<td>
+						<div class="input-group input-group-sm">
+							<input class="form-control" th:field="*{balance}" th:value="${account.balance}"  disabled>
+						</div>
+					</td>
+				</tr>
+			</table>
+			<button type="submit" class="btn btn-success">Update info</button>
+			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#balanceModal">Add Balance</button>
+		</form>
+		
+<!-- 		<label>Name:</label> -->
+<!-- 		<div th:text="${account.name}"></div> -->
+<!-- 		<label>Balance:</label> -->
+<!-- 		<div th:text="${account.balance}"></div> -->
+<!-- 		<label>Role:</label> -->
+<!-- 		<div th:text="${account.role}"></div> -->
+		
 		<a class="btn btn-success" th:href="@{/projects/add}">Add Project</a>
 	</div>
 	
