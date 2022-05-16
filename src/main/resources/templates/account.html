@@ -13,83 +13,62 @@
 <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
 <link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
 <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
-
 <script>
 	function confirmAction() {
-		let confirmAction = confirm("Are you sure you want to delete this project?");
-		if (confirmAction) {
-			alert("Project deleted successfully.");
-		} else {
-			cancel();
-		}
-	}
-	function cancel() {
-		event.preventDefault();
+// 		let confirmAction = confirm("Are you sure you want to delete this project?");
+// 		if (confirmAction) {
+			alert("Account updated successfully.");
+// 		} else {
+// 			cancel();
+// 		}
+// 	}
+// 	function cancel() {
+// 		event.preventDefault();
 	}
 </script>
 </head>
 <body>
 	<div th:replace="/fragments/header::header"></div>
-
-	<div class="row">
-<!-- 		<div class="container col-sm-4"> -->
-<!-- 			<h1>Account info</h1> -->
-<!-- 			<label>Name:</label> -->
-<!-- 			<div th:text="${account.name}"></div> -->
-<!-- 			<label>Balance:</label> -->
-<!-- 			<div th:text="${account.balance}"></div> -->
-<!-- 			<label>Role:</label> -->
-<!-- 			<div th:text="${account.role}"></div> -->
-<!-- 			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#balanceModal">Add -->
-<!-- 				Balance</button> -->
-<!-- 		</div> -->
-		
-			<div class="container col-sm-4">
-		<h1>Account info</h1>
-		<form th:action="@{/accounts/update}" th:object="${account}" method="post">
-			<input type="hidden" th:field="*{id}" th:value="${account.id}">
-			<table class="mb-3">
-				<tr>
-					<th>Name:</th>
-					<td>
-						<div class="input-group input-group-sm">
-							<input class="form-control"  th:field="*{name}" th:value="${account.name}">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>Username:</th>
-					<td>
-						<div class="input-group input-group-sm">
-							<input class="form-control"  th:field="*{username}" th:value="${account.username}">
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<th>Balance:</th>
-					<td>
-						<div class="input-group input-group-sm">
-							<input class="form-control" th:field="*{balance}" th:value="${account.balance}"  disabled>
-						</div>
-					</td>
-				</tr>
-			</table>
-			<button type="submit" class="btn btn-success">Update info</button>
-			<button type="button" class="btn btn-info" data-toggle="modal" data-target="#balanceModal">Add Balance</button>
-		</form>
-		
-<!-- 		<label>Name:</label> -->
-<!-- 		<div th:text="${account.name}"></div> -->
-<!-- 		<label>Balance:</label> -->
-<!-- 		<div th:text="${account.balance}"></div> -->
-<!-- 		<label>Role:</label> -->
-<!-- 		<div th:text="${account.role}"></div> -->
-		
-	</div>
-
-
-
-		<div class="col-sm-8" style="padding: 50px">
+	<div class="row px-4">
+		<!-- ------------------------------------- Account Info ------------------------------------------------------ -->
+		<div class="container col-md-4">
+			<h1>Account info</h1>
+			<form th:action="@{/accounts/update}" th:object="${account}" method="post">
+				<input type="hidden" th:field="*{id}" th:value="${account.id}">
+				<table class="mb-3">
+					<tr>
+						<th>Name:</th>
+						<td>
+							<div class="input-group input-group-sm">
+								<input class="form-control" th:field="*{name}" th:value="${account.name}">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>Username:</th>
+						<td>
+							<div class="input-group input-group-sm">
+								<input class="form-control" th:field="*{username}" th:value="${account.username}">
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<th>Balance:</th>
+						<td>
+							<!-- 							<div class="input-group input-group-sm"> -->
+							<span th:text="${account.balance}"></span>
+							<!-- 							</div> -->
+						</td>
+					</tr>
+				</table>
+				<button onClick="confirmAction()" type="submit" class="btn btn-success">Update info</button>
+				<button type="button" class="btn btn-info" data-toggle="modal" data-target="#balanceModal">Add
+					Balance</button>
+			</form>
+		</div>
+		<!-- ------------------------------------- Account Info Ends------------------------------------------------------ -->
+		<!-- ------------------------------------- Project List ------------------------------------------------------ -->
+		<div class="container col-md-8">
 			<h1>Project List</h1>
 			<br>
 			<a class="btn btn-warning" th:href="@{/projects/add}">Add Project</a>
@@ -127,11 +106,8 @@
 				<tbody>
 			</table>
 		</div>
+		<!-- ------------------------------------- Project List Ends ------------------------------------------------------ -->
 	</div>
-
-
-
-
 	<!-- -------------------------------------Modal------------------------------------------------------ -->
 	<div class="modal fade" id="balanceModal" tabindex="-1" role="dialog"
 		aria-labelledby="balanceModalLabel" aria-hidden="true">
@@ -143,43 +119,32 @@
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-
-
 				<div class="modal-body">
-					<form class="form-donation" th:action="@{/accounts/balance}" th:object="${account}"
-						method="post">
+					<form class="form-donation" th:action="@{/accounts/balance}" method="get">
 						<h3 class="title-style-1 text-center">
 							Enter amount
 							<span class="title-under"></span>
 						</h3>
-
 						<br>
-
 						<div class="row">
 							<div class="form-group col-md-12 ">
-								<input type="text" class="form-control" th:field="*{balance}" placeholder="Amount">
+								<input type="text" class="form-control" name="amount" placeholder="Amount">
 							</div>
 						</div>
-
 						<div class="row">
-
 							<div class="form-group col-md-12">
 								<button type="submit" class="btn btn-success">Add Balance</button>
 							</div>
 						</div>
 					</form>
 				</div>
-
 			</div>
 		</div>
 	</div>
 	<!-- -------------------------------------Modal ends------------------------------------------------------ -->
-
-
 	<div th:replace="/fragments/footer::footer"></div>
 	<div th:replace="/fragments/footer::copy"></div>
 </body>
-
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>
 <script th:src="@{/js/popper.min.js}"></script>
 <script th:src="@{/js/bootstrap.min.js}"></script>

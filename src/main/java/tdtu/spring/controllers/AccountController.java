@@ -1,6 +1,7 @@
 package tdtu.spring.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tdtu.spring.models.Account;
 import tdtu.spring.models.CustomUser;
@@ -51,8 +53,8 @@ public class AccountController {
 		return "account";
 	}
 
-	@PostMapping("/balance")
-	public String addBalance(@ModelAttribute(value = "account") Account account) {
+	@GetMapping("/balance")
+	public String addBalance( @RequestParam("amount") int amount) {
 
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -61,9 +63,8 @@ public class AccountController {
 		Account currentAccount = accountService.get(accountId);
 
 		int currentAmount = currentAccount.getBalance();
-		int addAmount = account.getBalance();
 
-		int newAmount = currentAmount + addAmount;
+		int newAmount = currentAmount + amount;
 
 		accountService.updateBalance(accountId, newAmount);
 
