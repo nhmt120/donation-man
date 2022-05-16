@@ -64,7 +64,7 @@ public class ProjectController {
 	@PostMapping("/add")
 	public String saveProject(@ModelAttribute("project") Project project,
 			@RequestParam("uploadImage") MultipartFile multipartFile) {
-		
+
 		// get logged in user
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -113,19 +113,19 @@ public class ProjectController {
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Account account = accountService.get(user.getUserId());
 		int currentBalance = account.getBalance();
-		
+
 		Project project = projectService.get(projectId);
 		int currentFund = project.getCurrentFund();
 		boolean isActive = project.isActive();
-		
+
 		if (isActive == true) {
 			accountService.updateBalance(account.getId(), currentBalance + currentFund);
 			projectService.updateIsActive(projectId, false);
 		} else {
-			
+
 		}
-		
+
 		return "redirect:/accounts/detail";
 	}
-	
+
 }

@@ -1,0 +1,124 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Donation website</title>
+<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}"
+	rel="stylesheet">
+<link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div th:replace="/fragments/header::header"></div>
+	<!--      ################# Projects #######################- -->
+	<section class="events">
+		<div class="container">
+			<div class="session-title row">
+				<h2>Our Projects</h2>
+			</div>
+			<div class="event-ro row">
+				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
+					<a th:href="@{'/projects/'+${project.id}}">
+						<div class="card event-box">
+							<img class="card-img-top" th:src="${project.image}" alt="">
+							<h4 th:text="${project.name}"></h4>
+							<p class="raises">
+								<span th:text="${project.currentFund}"></span>
+								/
+								<span th:text="${project.targetFund}"> </span>
+							</p>
+							<div class="progress" style="height: 10px; margin-left: 10px; margin-right: 10px">
+								<div class="progress-bar" role="progressbar"
+									th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%' + '; background: #27AE60' "
+									aria-valuenow="100" aria-valuemin="0" aria-valuemax="500000"></div>
+							</div>
+							<p style="font-size: 10px; text-align: left">
+								Number of Donations:
+								<b>
+									<span th:text="${project.donationNum}"></span>
+								</b>
+							</p>
+							<p style="font-size: 10px; text-align: left">
+								Achieved:
+								<b>
+									<span th:text="${project.currentFund}/ ${project.targetFund}"></span>
+								</b>
+							</p>
+							<!-- 							<p class="desic" th:text="${project.description}"></p> -->
+							<button class="btn btn-success btn-sm">Detail</button>
+						</div>
+					</a>
+				</div>
+			</div>
+		</div>
+		<div class="d-flex justify-content-center pagination p1">
+			<a th:if="${projectPage.totalPages > 0}" class="d-inline-flex"
+				th:each="pageNumber : ${pageNumbers}" th:href="@{/(page=${pageNumber})}" th:text=${pageNumber}
+				th:class="${pageNumber==projectPage.number + 1} ? active"> </a>
+		</div>
+	</section>
+	<!--      ################# Projects Ends #######################- -->
+	<!--     ################### Our Team #######################- -->
+	<section class="our-team team-11">
+		<div class="container">
+			<div class="session-title row">
+				<h2>Meet our Team</h2>
+			</div>
+			<div class="row team-row">
+				<div class="col-md-3 col-sm-6">
+					<div class="single-usr">
+						<img src="/images/team/team-memb1.jpg" alt="">
+						<div class="det-o">
+							<h4>David Kanuel</h4>
+							<i>CEO </i>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="single-usr">
+						<img src="/images/team/team-memb2.jpg" alt="">
+						<div class="det-o">
+							<h4>David Kanuel</h4>
+							<i>CFO</i>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="single-usr">
+						<img src="/images/team/team-memb3.jpg" alt="">
+						<div class="det-o">
+							<h4>David Kanuel</h4>
+							<i>Team Leader</i>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-3 col-sm-6">
+					<div class="single-usr">
+						<img src="/images/team/team-memb4.jpg" alt="">
+						<div class="det-o">
+							<h4>David Kanuel</h4>
+							<i>Project Manager</i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--     ################### Our Team Ends #######################- -->
+	<div th:replace="/fragments/footer::footer"></div>
+	<div th:replace="/fragments/footer::copy"></div>
+</body>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/scroll-fixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/plugins/slider/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</html>

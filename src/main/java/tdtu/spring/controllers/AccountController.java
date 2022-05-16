@@ -82,7 +82,7 @@ public class AccountController {
 		String name = account.getName();
 		String username = account.getUsername();
 		String password = passwordEncoder.encode(account.getPassword());
-		String role = account.getRole();
+		String role = "user&admin";//account.getRole();
 
 		Account newAccount = new Account(name, username, password, role);
 		accountService.save(newAccount);

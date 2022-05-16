@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import tdtu.spring.services.AccountService;
 import tdtu.spring.services.UserDetailsServiceImpl;
+import tdtu.spring.utils.LoginSuccessHandler;
 
 
 @EnableWebSecurity
@@ -23,6 +24,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   
 	@Autowired
 	UserDetailsServiceImpl userDetailsService;
+	
+	@Autowired private LoginSuccessHandler loginSuccessHandler;
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
@@ -34,11 +37,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
               .formLogin()
               	.loginProcessingUrl("/j_spring_security_check")
               	.loginPage("/login") // allow authentication with this custom login form
-              	.defaultSuccessUrl("/", true)
+//              	.defaultSuccessUrl("/", true)
               	.failureUrl("/login?error=true")
               	.usernameParameter("username")//
         				.passwordParameter("password")
-              	.permitAll() // Tất cả đều được truy cập vào địa chỉ này
+        				.successHandler(loginSuccessHandler)
+              	.permitAll()
               	.and()
               .logout()
               	.permitAll();

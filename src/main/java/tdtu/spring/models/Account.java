@@ -1,7 +1,11 @@
 package tdtu.spring.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.*;
 
@@ -40,8 +44,26 @@ public class Account {
 //	@JsonIgnoreProperties("donation")
 	private List<Donation> projectList = new ArrayList<>();
 
+	public Set<String> getRoles() {
+		return new HashSet<String>(Arrays.asList(role.split("&")));
+	}
+
 	public void addDonation(Donation donation) {
 		this.donationList.add(donation);
+	}
+
+	public boolean hasRole(String roleName) {
+		System.out.println("----------------print has role-----------------------------------------------");
+		System.out.println(this.getRoles());
+
+		Iterator<String> iterator = this.getRoles().iterator();
+		while (iterator.hasNext()) {
+			String accountRole = iterator.next();
+			if (accountRole.equals(roleName)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public Account() {

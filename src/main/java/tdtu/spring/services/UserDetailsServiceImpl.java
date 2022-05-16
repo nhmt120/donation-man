@@ -3,6 +3,7 @@ package tdtu.spring.services;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -48,9 +49,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //			grantList.add(authority);
 //		}
 //	}
-		
+		Set<String> roles = account.getRoles();
 		List<GrantedAuthority> grantList = new ArrayList<GrantedAuthority>();
-		grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
+//		grantList.add(new SimpleGrantedAuthority("ROLE_USER"));
+		
+		for (String role : roles) {
+			grantList.add(new SimpleGrantedAuthority(role));
+		}
 
 		UserDetails userDetails = (UserDetails) new CustomUser(account.getUsername(), //
 				account.getPassword(), grantList, account.getId());
