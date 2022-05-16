@@ -50,7 +50,9 @@ textarea {
   cursor: pointer; }
 
 html, body {
-  height: 100%; }
+  min-height: 100vh;
+  display:flex; 
+  flex-direction:column; }
 
 p {
   margin-bottom: 0px;
@@ -248,7 +250,7 @@ body {
 
 /* =================== Header Style Starts Here =================== */
 header {
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+/*   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); */
   background-color: #FFF;
   width: 100%;
   z-index: 99; }
@@ -570,6 +572,10 @@ header {
     width: 1%;
 }
 
+.currentfund {
+	font-size: 150%;
+}
+
 /* ===================================== Mission Vision CSS ================================== */
 .mission-vision {
   background-color: #FFF; }
@@ -701,6 +707,7 @@ header {
   font-family: "mouse-300", Arial, Helvetica, sans-serif; }
 
 .copy {
+  margin-top:auto;
   padding: 20px;
   background: #1a202f;
   color: #FFF; }
@@ -838,7 +845,7 @@ header {
 	margin: 0 0;
 }
 
-.container input{
+.container input , .container textarea {
     width: 100%;
 	padding: 12px 20px;
 	margin: 8px 0;
@@ -848,7 +855,7 @@ header {
 }
 
 .login-container {
-	margin: 100px auto;
+	margin: 30px auto;
 	max-width: 500px;
 }
 

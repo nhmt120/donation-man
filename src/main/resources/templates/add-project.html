@@ -22,24 +22,25 @@
 		<div class="text-center">
 			<h1>Add New Project</h1>
 		</div>
-		<form class="form-edit container" th:action="@{add}" th:object="${project}" method="post" enctype="multipart/form-data">
-			<div class="text-center"></div>
-			Name:
-			<input type="text" th:field="*{name}" required/>
-			<br>
-			Description:
-			<textarea rows="5" class="form-control" th:field="*{description}" required> </textarea>
-			<br>
-			Target Fund:
-			<input type="text" th:field="*{targetFund}" required/>
-			<br>
-			<label>Image:</label>			    
-			<input type="file" name="uploadImage" accept="image/png, image/jpeg" required/>
+		<form class="form-edit" th:action="@{add}" th:object="${project}" method="post" enctype="multipart/form-data">
+			<div class="container">
+				<label for="name"><b>Name:</b></label>
+				<input id="name" type="text" th:field="*{name}" required/>
 
-			<input type="submit" value="Add" />
+				<label for="desc"><b>Description:</b></label>
+				<textarea id="desc" rows="3" class="form-control" th:field="*{description}" required> </textarea>
+
+				<label for="target"><b>Target Fund:</b></label>
+				<input id="target" type="text" th:field="*{targetFund}" required/>
+
+				<label for="image"><b>Image:</b></label>			    
+				<input id="image" type="file" class="form-control-file" name="uploadImage" accept="image/png, image/jpeg" required/>
+	
+				<input type="submit" value="Add" />
+			</div>
 		</form>
 	</div>
-	<div th:replace="/fragments/footer::footer"></div>
+<!-- 	<div th:replace="/fragments/footer::footer"></div> -->
 	<div th:replace="/fragments/footer::copy"></div>
 </body>
 <script th:src="@{/js/jquery-3.2.1.min.js}"></script>

@@ -23,17 +23,22 @@
 			<h1>Register account</h1>
 		</div>
 		<form class="form-edit container" th:action="@{add}" th:object="${account}" method="post">
-			<input type="text" th:field="*{name}" placeholder="Name" required />
-			<br>
-			<input type="text" th:field="*{username}" placeholder="Username" required />
-			<br>
-			<input type="password" th:field="*{password}" placeholder="Password" />
-			<br>
-			<input type="submit" value="Register" required />
+			<div class="container">
+				<label for="name"><b>Name:</b></label>
+				<input id="name" type="text" th:field="*{name}" placeholder="Name" required />
+				
+				<label for="username"><b>Username:</b></label>
+				<input id="username" type="text" th:field="*{username}" placeholder="Username" required />
+				
+				<label for="password"><b>Password:</b></label>
+				<input id="password" type="password" th:field="*{password}" placeholder="Password" required />
+				
+				<input  type="submit" class="btn btn-primary" value="Register" required />
+			</div>
 		</form>
 	</div>
 
-	<div th:replace="/fragments/footer::footer"></div>
+<!-- 	<div th:replace="/fragments/footer::footer"></div> -->
 	<div th:replace="/fragments/footer::copy"></div>
 
 </body>

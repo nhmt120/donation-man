@@ -3,119 +3,106 @@
 <head>
 <meta charset="utf-8">
 <title>Insert title here</title>
-<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
-<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}"
-	rel="stylesheet">
-<link rel="shortcut icon" th:href="@{/images/fav.jpg}">
-<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-<link rel="stylesheet" th:href="@{/css/all.min.css}">
-<link rel="stylesheet" th:href="@{/css/animate.css}">
-<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
-<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
-<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
 </head>
 <body>
-	<footer th:fragment="footer" class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-4 col-sm-12">
-					<h2>About Us</h2>
-					<p>Team Member:</p>
-					<ul class="list-inline">
-  <li class="list-inline-item">Nguyễn Hoàng Minh Thư</li>
-  <li class="list-inline-item">Mạc Thuận Đạt</li>
-</ul>
-<!-- 					<ul><li>Nguyễn Hoàng Minh Thư</li> -->
-<!-- 					<li>Mạc Thuận Đạt</li> -->
+<!-- 	<footer th:fragment="footer" class="footer"> -->
+<!-- 		<div class="container"> -->
+<!-- 			<div class="row"> -->
+<!-- 				<div class="col-md-4 col-sm-12"> -->
+<!-- 					<h2>About Us</h2> -->
+<!-- 					<p>Team Member:</p> -->
+<!-- 					<ul class=""> -->
+<!-- 						<li class="">Nguyễn Hoàng Minh Thư</li> -->
+<!-- 						<li class="">Mạc Thuận Đạt</li> -->
+<!-- </ul> -->
+<!-- 					<p>We focus on technologies that promise to reduce costs, streamline processes and speed -->
+<!-- 						time-to-market, Backed by our strong quality processes and rich experience managing global... -->
+<!-- 					</p> -->
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4 col-sm-12"> -->
+<!-- 					<h2>Useful Links</h2> -->
+<!-- 					<ul class="list-unstyled link-list"> -->
+<!-- 						<li> -->
+<!-- 							<a ui-sref="about" href="#/about">About us</a> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a ui-sref="portfolio" href="#/portfolio">Portfolio</a> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a ui-sref="products" href="#/products">Latest jobs</a> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a ui-sref="gallery" href="#/gallery">Gallery</a> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a ui-sref="contact" href="#/contact">Contact us</a> -->
+<!-- 							<i class="fa fa-angle-right"></i> -->
+<!-- 						</li> -->
 <!-- 					</ul> -->
-					<p>We focus on technologies that promise to reduce costs, streamline processes and speed
-						time-to-market, Backed by our strong quality processes and rich experience managing global...
-					</p>
-				</div>
-				<div class="col-md-4 col-sm-12">
-					<h2>Useful Links</h2>
-					<ul class="list-unstyled link-list">
-						<li>
-							<a ui-sref="about" href="#/about">About us</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a ui-sref="portfolio" href="#/portfolio">Portfolio</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a ui-sref="products" href="#/products">Latest jobs</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a ui-sref="gallery" href="#/gallery">Gallery</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-						<li>
-							<a ui-sref="contact" href="#/contact">Contact us</a>
-							<i class="fa fa-angle-right"></i>
-						</li>
-					</ul>
-				</div>
-				<div class="col-md-4 col-sm-12 map-img">
-					<h2>Contact Us</h2>
-					<address class="md-margin-bottom-40">
-						BlueDart
-						<br>
-						Marthandam (K.K District)
-						<br>
-						Tamil Nadu, IND
-						<br>
-						Phone: +91 9159669599
-						<br>
-						Email:
-						<a href="mailto:info@anybiz.com" class="">info@bluedart.in</a>
-						<br>
-						Web:
-						<a href="smart-eye.html" class="">www.bluedart.in</a>
-					</address>
+<!-- 				</div> -->
+<!-- 				<div class="col-md-4 col-sm-12 map-img"> -->
+<!-- 					<h2>Contact Us</h2> -->
+<!-- 					<address class="md-margin-bottom-40"> -->
+<!-- 						BlueDart -->
+<!-- 						<br> -->
+<!-- 						Marthandam (K.K District) -->
+<!-- 						<br> -->
+<!-- 						Tamil Nadu, IND -->
+<!-- 						<br> -->
+<!-- 						Phone: +91 9159669599 -->
+<!-- 						<br> -->
+<!-- 						Email: -->
+<!-- 						<a href="mailto:info@anybiz.com" class="">info@bluedart.in</a> -->
+<!-- 						<br> -->
+<!-- 						Web: -->
+<!-- 						<a href="smart-eye.html" class="">www.bluedart.in</a> -->
+<!-- 					</address> -->
 
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 			</div> -->
 
 
-			<div class="nav-box row clearfix">
-				<div class="inner col-md-9 clearfix">
-					<ul class="footer-nav clearfix">
-						<li>
-							<a href="#">Home</a>
-						</li>
-						<li>
-							<a href="#">About</a>
-						</li>
-						<li>
-							<a href="#">Gallery</a>
-						</li>
-						<li>
-							<a href="#">Servies</a>
-						</li>
-						<li>
-							<a href="#">Blog</a>
-						</li>
-						<li>
-							<a href="#">Contact</a>
-						</li>
-					</ul>
+<!-- 			<div class="nav-box row clearfix"> -->
+<!-- 				<div class="inner col-md-9 clearfix"> -->
+<!-- 					<ul class="footer-nav clearfix"> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">Home</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">About</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">Gallery</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">Servies</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">Blog</a> -->
+<!-- 						</li> -->
+<!-- 						<li> -->
+<!-- 							<a href="#">Contact</a> -->
+<!-- 						</li> -->
+<!-- 					</ul> -->
 
 
-				</div>
-				<div class="donate-link col-md-3">
-					<a href="donate.html" class="btn btn-primary ">
-						<span class="btn-title">Donate Now</span>
-					</a>
-				</div>
-			</div>
+<!-- 				</div> -->
+<!-- 				<div class="donate-link col-md-3"> -->
+<!-- 					<a href="donate.html" class="btn btn-primary "> -->
+<!-- 						<span class="btn-title">Donate Now</span> -->
+<!-- 					</a> -->
+<!-- 				</div> -->
+<!-- 			</div> -->
 
-		</div>
+<!-- 		</div> -->
 
-	</footer>
+<!-- 	</footer> -->
 
-	<div th:fragment="copy" class="copy">
+	<footer th:fragment="copy" class="copy">
 		<div class="container">
 			<a href="https://www.smarteyeapps.com/">2015 &copy; All Rights Reserved | Designed and
 				Developed by Smarteyeapps</a>
@@ -138,6 +125,6 @@
 				</a>
 			</span>
 		</div>
-	</div>
+	</footer>
 </body>
 </html>

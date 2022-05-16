@@ -104,27 +104,17 @@
 								/
 								<span th:text="${project.targetFund}"> </span>
 							</p>
-							<div class="progress" style="height: 10px; margin-left: 10px; margin-right: 10px">
+							<div class="progress mx-3" style="height: 10px;">
 								<div class="progress-bar" role="progressbar"
 									th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%' + '; background: #27AE60' "
 									aria-valuenow="100" aria-valuemin="0" aria-valuemax="500000"></div>
 							</div>
-							<p style="font-size: 10px; text-align: left">
+							<p class="mx-3" style="font-size: 10px; text-align: left">
 								Number of Donations:
 								<b>
 									<span th:text="${project.donationNum}"></span>
 								</b>
 							</p>
-
-
-							<p style="font-size: 10px; text-align: left">
-								Achieved:
-								<b>
-									<span th:text="${project.currentFund}/ ${project.targetFund}"></span>
-								</b>
-							</p>
-
-
 
 							<!-- 							<p class="desic" th:text="${project.description}"></p> -->
 							<button class="btn btn-success btn-sm">Detail</button>
@@ -196,7 +186,7 @@
 
 
 
-	<div th:replace="/fragments/footer::footer"></div>
+<!-- 	<div th:replace="/fragments/footer::footer"></div> -->
 	<div th:replace="/fragments/footer::copy"></div>
 
 

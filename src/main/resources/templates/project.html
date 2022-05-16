@@ -24,36 +24,43 @@
 		<div class="row mx-5 mb-5">
 			<div th:text="${project.description}" class="pl-2 col-sm-12 col-md-12 col-lg-8 col-xl-8"></div>
 			<div class="pr-2 col-sm-12 col-md-12 col-lg-4 col-xl-4 align-items-start">
-				<div class="card">
+				<div class="card px-3">
 					<div class="text-center pt-2 h4">Project Information</div>
 					<table class="project-info">
 						<tr>
 							<th class="fit">Raised:</th>
-							<td>
-								<span th:text="${project.currentFund}" class="text-center"></span> 
+							<td class="text-center">
+								<span th:text="'$' + ${project.currentFund}" class="currentfund font-weight-bold"></span> 
 								/
-								<span th:text="${project.targetFund}" class="text-center"></span>
-								<div class="progress" style="height: 10px;">
-									<div class="progress-bar" role="progressbar" th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%'" aria-valuenow="100"
+								<span th:text="'$' + ${project.targetFund}" class=""></span>
+								<div class="progress" style="height: 15px;">
+									<div class="progress-bar bg-success" role="progressbar" th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%'" aria-valuenow="100"
 										aria-valuemin="0" aria-valuemax="500000"></div>
 								</div>
 							</td>
 						</tr>
 						<tr>
-							<td th:text="${project.donationNum} + ' Donations'" colspan="2"></td>
+							<th class="fit">Status:</th>
+							<td>
+								<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span>
+								<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span>
+							</td>
+						</tr>
+						<tr>
+							<td th:text="${project.donationNum} + ' Donation(s)'" colspan="2"></td>
 						</tr>
 					</table>
 				</div>
 
 				<div class="p-3">
-					<button type="button" class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;" data-toggle="modal" data-target="#donateModal">Donate</button>
+					<button type="button" class="btn btn-success mt-2 py-3 w-100" style="font-size: 20px;" data-toggle="modal" data-target="#donateModal" th:disabled="${!project.isActive}">Donate</button>
 				</div>
 				<img width="100%" th:src="${project.image}" alt="">
 			</div>
 		</div>
 	</div>
 
-	<div th:replace="/fragments/footer::footer"></div>
+<!-- 	<div th:replace="/fragments/footer::footer"></div> -->
 	<div th:replace="/fragments/footer::copy"></div>
 	
 <!-- 	<div th:if="${param.insufficient}" th:onload="openModal()"> -->
@@ -99,7 +106,7 @@
 						<div class="row">
 
 							<div class="form-group col-md-12">
-								<button onclick="" type="submit" class="btn btn-success">DONATE NOW</button>
+								<button type="submit" class="btn btn-success">DONATE NOW</button>
 							</div>
 						</div>
 					</form>

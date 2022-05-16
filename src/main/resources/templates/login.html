@@ -27,7 +27,7 @@
 		<div th:if="${param.logout}">
 			You have been logged out.
 		</div>
-		<form class="form-edit" th:action="@{/j_spring_security_check}" method="post">
+		<form class="form-edit container" th:action="@{/j_spring_security_check}" method="post">
 	        <div class="container">
 			    <label for="username"><b>Username</b></label>
 			    <input type="text" placeholder="Enter Username" name="username" required>
@@ -40,7 +40,7 @@
 	    </form>
 	</div>
 
-	<div th:replace="/fragments/footer::footer"></div>
+<!-- 	<div th:replace="/fragments/footer::footer"></div> -->
 	<div th:replace="/fragments/footer::copy"></div>
 	
 </body>
