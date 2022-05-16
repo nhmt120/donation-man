@@ -39,12 +39,14 @@ public class AccountController {
 
 	@GetMapping("/detail")
 	public String showAccountDetail(Model model) {
+		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int accountId = user.getUserId();
 		Account account = accountService.get(accountId);
 		List<Project> projects = projectService.findByAccountId(accountId);
 		System.out.println(projects);
 		model.addAttribute("account", account);
+		model.addAttribute("projects", projects);
 		
 		return "account";
 	}
@@ -84,7 +86,7 @@ public class AccountController {
 		Account newAccount = new Account(name, username, password, role);
 		accountService.save(newAccount);
 
-		System.out.println(newAccount);
+//		System.out.println(newAccount);
 
 		return "redirect:/login";
 	}

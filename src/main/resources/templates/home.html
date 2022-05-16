@@ -21,7 +21,7 @@
 	<div th:replace="/fragments/header::header"></div>
 
 
-	<!--   ******************** Slider Starts Here ******************* -->
+	<!--   ******************** Carousel ******************* -->
 	<div class="slider">
 		<!--         Set up your HTML -->
 		<div class="owl-carousel ">
@@ -34,9 +34,9 @@
 						<div class="row">
 							<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
 								<div class="animated bounceInDown slider-captions">
-									<h1 class="slider-title">Most Stylish Free Travel Website</h1>
+									<h1 class="slider-title">Our Website</h1>
 									<p class="slider-text hidden-xs">Lorem Ipsum is simply dummy text of the printing and
-										typesetting industry. Lorem Ipsum has been the industry's</p>
+										typesetting industry. Lorem Ipsum has been the industry's.</p>
 
 								</div>
 							</div>
@@ -54,7 +54,7 @@
 							<div class="slider-captions ">
 								<h1 class="slider-title">It's time for better help.</h1>
 								<p class="slider-text hidden-xs">Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's</p>
+									typesetting industry. Lorem Ipsum has been the industry's.</p>
 
 							</div>
 						</div>
@@ -69,9 +69,9 @@
 					<div class="row">
 						<div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
 							<div class="slider-captions ">
-								<h1 class="slider-title">Most Attractive Travel Template</h1>
+								<h1 class="slider-title">Most Attractive Donate Template</h1>
 								<p class="slider-text hidden-xs">Lorem Ipsum is simply dummy text of the printing and
-									typesetting industry. Lorem Ipsum has been the industry's</p>
+									typesetting industry. Lorem Ipsum has been the industry's.</p>
 
 							</div>
 						</div>
@@ -81,15 +81,16 @@
 
 		</div>
 	</div>
+	<!--   ******************** Carousel Ends ******************* -->
 
 
 
-	<!--      ################# Events Start Here#######################- -->
+
+	<!--      ################# Projects #######################- -->
 	<section class="events">
 		<div class="container">
 			<div class="session-title row">
-				<h2>Our Causes</h2>
-				<p>We are a non-profitable and Charity raising money for child education</p>
+				<h2>Our Projects</h2>
 			</div>
 			<div class="event-ro row">
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
@@ -99,10 +100,33 @@
 
 							<h4 th:text="${project.name}"></h4>
 							<p class="raises">
-								<span th:text="${project.currentFund}"></span> / <span th:text="${project.targetFund}">
-								</span>
+								<span th:text="${project.currentFund}"></span>
+								/
+								<span th:text="${project.targetFund}"> </span>
 							</p>
-							<p class="desic" th:text="${project.description}"></p>
+							<div class="progress" style="height: 10px; margin-left: 10px; margin-right: 10px">
+								<div class="progress-bar" role="progressbar"
+									th:style="'width:' + (${project.currentFund}/ ${project.targetFund})*100 + '%' + '; background: #27AE60' "
+									aria-valuenow="100" aria-valuemin="0" aria-valuemax="500000"></div>
+							</div>
+							<p style="font-size: 10px; text-align: left">
+								Number of Donations:
+								<b>
+									<span th:text="${project.donationNum}"></span>
+								</b>
+							</p>
+
+
+							<p style="font-size: 10px; text-align: left">
+								Achieved:
+								<b>
+									<span th:text="${project.currentFund}/ ${project.targetFund}"></span>
+								</b>
+							</p>
+
+
+
+							<!-- 							<p class="desic" th:text="${project.description}"></p> -->
 							<button class="btn btn-success btn-sm">Detail</button>
 						</div>
 					</a>
@@ -115,17 +139,17 @@
 				th:each="pageNumber : ${pageNumbers}" th:href="@{/(page=${pageNumber})}" th:text=${pageNumber}
 				th:class="${pageNumber==projectPage.number + 1} ? active"> </a>
 		</div>
-
 	</section>
+	<!--      ################# Projects Ends #######################- -->
 
 
-	<!--     ################### Our Team Starts Here #######################- -->
+
+
+	<!--     ################### Our Team #######################- -->
 	<section class="our-team team-11">
 		<div class="container">
 			<div class="session-title row">
 				<h2>Meet our Team</h2>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce fringilla vel nisl a
-					dictum. Donec ut est arcu. Donec hendrerit velit</p>
 			</div>
 			<div class="row team-row">
 				<div class="col-md-3 col-sm-6">
@@ -164,11 +188,11 @@
 						</div>
 					</div>
 				</div>
-
-
 			</div>
 		</div>
 	</section>
+	<!--     ################### Our Team Ends #######################- -->
+
 
 
 

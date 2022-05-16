@@ -39,7 +39,7 @@ public class ProjectController {
 	@GetMapping("")
 	public String showProjectList(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
-		
+
 		int currentPage = page.orElse(1);
 		int pageSize = size.orElse(9);
 
@@ -62,16 +62,18 @@ public class ProjectController {
 	}
 
 	@PostMapping("/add")
-	public String saveProject(@ModelAttribute("project") Project project, @RequestParam("uploadImage") MultipartFile multipartFile) {
+	public String saveProject(@ModelAttribute("project") Project project,
+			@RequestParam("uploadImage") MultipartFile multipartFile) {
 
-		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // get logged in user
-		
+		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal(); // get logged
+																																																					// in user
+
 		String name = project.getName();
 		String description = project.getDescription();
 		int targetFund = project.getTargetFund();
 		String image = "/images/events/" + StringUtils.cleanPath(multipartFile.getOriginalFilename());
 		Account account = accountService.get(user.getUserId());
-		
+
 		Project newProject = new Project(name, description, targetFund, account, image);
 		projectService.save(newProject);
 		return "redirect:/";
@@ -86,6 +88,7 @@ public class ProjectController {
 
 	@PostMapping("/update")
 	public String updateProject(@ModelAttribute("project") Project project) {
+
 		int id = project.getId();
 		String name = project.getName();
 		String description = project.getDescription();
@@ -95,44 +98,13 @@ public class ProjectController {
 		updatedProject.setId(id);
 		projectService.update(updatedProject);
 
-		return "redirect:/projects";
+		return "redirect:/accounts/detail";
 	}
 
 	@GetMapping("/delete/{id}")
 	public String deleteProject(Model model, @PathVariable(name = "id") int id) {
 		projectService.delete(id);
-		return "redirect:/projects";
+		return "redirect:/accounts/detail";
 	}
-
-	//////////// test pagination
-//	@GetMapping("")
-//  public String showProjectList(
-//    Model model, 
-//    @RequestParam("page") Optional<Integer> page, 
-//    @RequestParam("size") Optional<Integer> size) {
-//      int currentPage = page.orElse(1);
-//      int pageSize = size.orElse(6);
-//
-//      Page<Project> projectPage = projectService.findPaginatedProject(PageRequest.of(currentPage - 1, pageSize));
-//
-//      model.addAttribute("projectPage", projectPage);
-//
-//      int totalPages = projectPage.getTotalPages();
-//      if (totalPages > 0) {
-//          List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages)
-//              .boxed()
-//              .collect(Collectors.toList());
-//          model.addAttribute("pageNumbers", pageNumbers);
-//      }
-//      return "home";
-//  }
-//	
-//	@GetMapping("/{id}")
-//	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
-////		model.addAttribute("project", new Project());
-//		Project project = projectService.get(id);
-//		model.addAttribute("project", project);
-//		return "project";
-//	}
 
 }
