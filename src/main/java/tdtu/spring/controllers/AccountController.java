@@ -98,19 +98,18 @@ public class AccountController {
 //		return "update-account";
 //	}
 //
-//	@PostMapping("/update")
-//	public String updateAccount(@ModelAttribute("account") Account account) {
+	@PostMapping("/update")
+	public String updateAccount(@ModelAttribute("account") Account account) {
 //		int id = account.getId();
 //		String name = account.getName();
 //		String accountName = account.getUsername();
-//		String password = account.getPassword();
 //
 //		Account updatedAccount = new Account(name, accountName, password);
 //		updatedAccount.setId(id);
-//		accountService.update(updatedAccount);
-//
-//		return "redirect:/accounts";
-//	}
+		accountService.update(account);
+
+		return "redirect:/accounts/detail";
+	}
 //
 //	@GetMapping("/delete/{id}")
 //	public String deleteAccount(Model model, @PathVariable(name = "id") int id) {
