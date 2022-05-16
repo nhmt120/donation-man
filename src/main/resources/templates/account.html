@@ -29,9 +29,9 @@
 </head>
 <body>
 	<div th:replace="/fragments/header::header"></div>
-	<div class="row px-4">
+	<div class="row p-5">
 		<!-- ------------------------------------- Account Info ------------------------------------------------------ -->
-		<div class="container col-md-4">
+		<div class="container col-md-3">
 			<h1>Account info</h1>
 			<form th:action="@{/accounts/update}" th:object="${account}" method="post">
 				<input type="hidden" th:field="*{id}" th:value="${account.id}">
@@ -55,9 +55,7 @@
 					<tr>
 						<th>Balance:</th>
 						<td>
-							<!-- 							<div class="input-group input-group-sm"> -->
 							<span th:text="${account.balance}"></span>
-							<!-- 							</div> -->
 						</td>
 					</tr>
 				</table>
@@ -68,7 +66,7 @@
 		</div>
 		<!-- ------------------------------------- Account Info Ends------------------------------------------------------ -->
 		<!-- ------------------------------------- Project List ------------------------------------------------------ -->
-		<div class="container col-md-8">
+		<div class="container col-md-9">
 			<h1>Project List</h1>
 			<br>
 			<a class="btn btn-warning" th:href="@{/projects/add}">Add Project</a>
@@ -82,7 +80,8 @@
 						<th scope="col">Current Fund</th>
 						<th scope="col">Target Fund</th>
 						<th scope="col">Number of Donations</th>
-						<th class="text-center" scope="col" colspan="2">Modify</th>
+						<th scope="col">Is Active</th>
+						<th class="text-center" scope="col" colspan="3">Modify</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -91,16 +90,22 @@
 						<td>
 							<a class="text-primary" th:href="@{'/projects/'+${project.id}}" th:utext="${project.name}"></a>
 						</td>
-						<td th:utext="${project.currentFund}">...</td>
-						<td th:utext="${project.targetFund}">...</td>
-						<td th:utext="${project.donationNum}">...</td>
+						<td th:utext="${project.currentFund}"></td>
+						<td th:utext="${project.targetFund}"></td>
+						<td th:utext="${project.donationNum}"></td>
 						<td class="text-center">
-							<a class="btn btn-primary" role="button" th:href="@{'/projects/update/'+${project.id}}">
-								Update </a>
+							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span>
+							<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-warning" th:href="@{'/projects/retrieve/'+${project.id}}">Retrieve</a>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-primary" th:href="@{'/projects/update/'+${project.id}}">Update</a>
 						</td>
 						<td class="text-center">
 							<a class="btn btn-danger" onclick="confirmAction()"
-								th:href="@{'/projects/delete/'+${project.id}}"> Delete </a>
+								th:href="@{'/projects/delete/'+${project.id}}">Delete</a>
 						</td>
 					</tr>
 				<tbody>
