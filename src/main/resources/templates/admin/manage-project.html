@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<title>Account information</title>
+<link rel="shortcut icon" th:href="@{/images/fav.png}" type="image/x-icon">
+<link th:href="@{https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;500&display=swap}"
+	rel="stylesheet">
+<link rel="shortcut icon" th:href="@{/images/fav.jpg}">
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/all.min.css}">
+<link rel="stylesheet" th:href="@{/css/animate.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.carousel.min.css}">
+<link rel="stylesheet" th:href="@{/plugins/slider/css/owl.theme.default.css}">
+<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+<script>
+	function confirmAction() {
+			alert("Account updated successfully.");
+	}
+</script>
+</head>
+<body>
+	<div th:replace="/admin/header::header"></div>
+
+		<!-- ------------------------------------- Project List ------------------------------------------------------ -->
+		<div class="container col-md-9">
+			<h1>Project Management</h1>
+			<br>
+			<a class="btn btn-warning" th:href="@{/projects/add}">Add Project</a>
+			<br>
+			<br>
+			<table border="1" class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th scope="col">ID</th>
+						<th scope="col">Name</th>
+						<th scope="col">Current Fund</th>
+						<th scope="col">Target Fund</th>
+						<th scope="col">Number of Donations</th>
+						<th scope="col">Is Active</th>
+						<th class="text-center" scope="col" colspan="3">Modify</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="project : ${projects}">
+						<th scope="row" th:utext="${project.id}">...</th>
+						<td>
+							<a class="text-primary" th:href="@{'/projects/'+${project.id}}" th:utext="${project.name}"></a>
+						</td>
+						<td th:utext="${project.currentFund}"></td>
+						<td th:utext="${project.targetFund}"></td>
+						<td th:utext="${project.donationNum}"></td>
+						<td class="text-center">
+							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span>
+							<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-warning" th:href="@{'/projects/retrieve/'+${project.id}}">Retrieve</a>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-primary" th:href="@{'/projects/update/'+${project.id}}">Update</a>
+						</td>
+						<td class="text-center">
+							<a class="btn btn-danger" onclick="confirmAction()"
+								th:href="@{'/projects/delete/'+${project.id}}">Delete</a>
+						</td>
+					</tr>
+				<tbody>
+			</table>
+		</div>
+		<!-- ------------------------------------- Project List Ends ------------------------------------------------------ -->
+	
+	<div th:replace="/fragments/footer::footer"></div>
+	<div th:replace="/fragments/footer::copy"></div>
+</body>
+<script th:src="@{/js/jquery-3.2.1.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/plugins/scroll-fixed/jquery-scrolltofixed-min.js}"></script>
+<script th:src="@{/plugins/slider/js/owl.carousel.min.js}"></script>
+<script th:src="@{/js/script.js}"></script>
+</html>

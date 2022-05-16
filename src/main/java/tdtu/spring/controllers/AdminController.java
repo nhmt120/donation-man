@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import tdtu.spring.models.Account;
 import tdtu.spring.models.Project;
 import tdtu.spring.services.AccountService;
 import tdtu.spring.services.ProjectService;
@@ -29,7 +30,7 @@ public class AdminController {
 	private AccountService accountService;
 	
 	@GetMapping("")
-	public String showProjectList(Model model, @RequestParam("page") Optional<Integer> page,
+	public String showHome(Model model, @RequestParam("page") Optional<Integer> page,
 			@RequestParam("size") Optional<Integer> size) {
 
 		int currentPage = page.orElse(1);
@@ -46,4 +47,19 @@ public class AdminController {
 		}
 		return "admin/home";
 	}
+	
+	@GetMapping("/projects")
+	public String showManageProject(Model model) {
+		List<Project> projects = projectService.findAll();
+		model.addAttribute("projects", projects);
+		return "admin/manage-project";
+	}
+
+	@GetMapping("/accounts")
+	public String showManageAccount(Model model) {
+		List<Account> accounts = accountService.findAll();
+		model.addAttribute("accounts", accounts);
+		return "admin/manage-account";
+	}
+	
 }

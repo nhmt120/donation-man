@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -57,17 +58,11 @@ public class AccountController {
 	public String addBalance( @RequestParam("amount") int amount) {
 
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
 		int accountId = user.getUserId();
-
 		Account currentAccount = accountService.get(accountId);
-
 		int currentAmount = currentAccount.getBalance();
-
 		int newAmount = currentAmount + amount;
-
 		accountService.updateBalance(accountId, newAmount);
-
 		return "redirect:/accounts/detail";
 	}
 
@@ -92,13 +87,13 @@ public class AccountController {
 		return "redirect:/login";
 	}
 
-//	@GetMapping("/update/{id}")
-//	public String showUpdateAccount(Model model, @PathVariable(name = "id") int id) {
-//		Account account = accountService.get(id);
-//		model.addAttribute("account", account);
-//		return "update-account";
-//	}
-//
+	@GetMapping("/update/{id}")
+	public String showUpdateAccount(Model model, @PathVariable(name = "id") int id) {
+		Account account = accountService.get(id);
+		model.addAttribute("account", account);
+		return "update-account";
+	}
+
 	@PostMapping("/update")
 	public String updateAccount(@ModelAttribute("account") Account account) {
 //		int id = account.getId();
@@ -112,9 +107,9 @@ public class AccountController {
 		return "redirect:/accounts/detail";
 	}
 //
-//	@GetMapping("/delete/{id}")
-//	public String deleteAccount(Model model, @PathVariable(name = "id") int id) {
-//		accountService.delete(id);
-//		return "redirect:/accounts";
-//	}
+	@GetMapping("/delete/{id}")
+	public String deleteAccount(Model model, @PathVariable(name = "id") int id) {
+		accountService.delete(id);
+		return "redirect:/admin/accounts";
+	}
 }
