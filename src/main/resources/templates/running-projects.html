@@ -30,9 +30,9 @@
 
 							<h4 th:text="${project.name}"></h4>
 							<p class="raises">
-								<span th:text="${project.currentFund}"></span>
+								<span th:text="${#numbers.formatDecimal(project.currentFund, 0, 'COMMA', 0, 'POINT')}"></span>
 								/
-								<span th:text="${project.targetFund}"> </span>
+								<span th:text="${#numbers.formatDecimal(project.targetFund, 0, 'COMMA', 0, 'POINT')}"> </span>
 							</p>
 							<div class="progress mx-3" style="height: 10px;">
 								<div class="progress-bar bg-success" role="progressbar"
