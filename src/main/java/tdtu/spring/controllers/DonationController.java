@@ -1,6 +1,7 @@
 package tdtu.spring.controllers;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,24 @@ public class DonationController {
 //		return "home";
 //	}
 
+	@GetMapping("")
+	public String showAccountDonationList(Model model) {
+		
+		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		Account account = accountService.get(user.getUserId());
+		
+		List<Donation> donations = donationService.findByAccountId(account.getId());
+		System.out.println(donations);
+		
+//		sumAmount(projectId, accountId);
+		
+		
+//		model.addAttribute("account", donationService);
+//		model.addAttribute("projects", donationService);
+//		model.addAttribute("donations", donationService);
+		return "donation-list";
+	}
+
 //	@GetMapping("/add")
 //	public String showAddDonation(Model model) {
 //		model.addAttribute("donation", new Donation());
@@ -89,7 +108,7 @@ public class DonationController {
 		projectService.updateDonationNum(projectId, dnum);
 		accountService.updateBalance(accountId, newBalance);
 		
-		return "redirect:/projects/" + projectId;
+		return "redirect:/project/" + projectId;
 	}
 
 }

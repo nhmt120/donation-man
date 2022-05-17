@@ -15,9 +15,14 @@ public interface DonationRepository extends JpaRepository<Donation, Integer> {
 	@Override
 	@Query("SELECT d FROM Donation d")
 	public List<Donation> findAll();
+	
+	public List<Donation> findByAccountId(int id);
 
 	@Query(value = "SELECT SUM(d.amount) FROM Donation d WHERE d.project_id = ?1", nativeQuery = true)
 	public int getTotalAmountByProjectId(int id);
+
+	@Query(value = "SELECT SUM(d.amount) FROM Donation d WHERE d.project_id = ?1 and d.account_id = ?2", nativeQuery = true)
+	public int getTotalAmountByProjectIdAndAccountId(int projectId, int accountId);
 
 	@Query(value = "SELECT COUNT(d.amount) FROM Donation d WHERE d.project_id = ?1", nativeQuery = true)
 	public int countByProjectId(int id);

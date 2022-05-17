@@ -25,6 +25,10 @@ public class DonationService {
 		return repo.findAll();
 	}
 
+	public List<Donation> findByAccountId(int id) {
+		return repo.findByAccountId(id);
+	}
+
 	public Donation save(Donation donation) {
 		return repo.save(donation);
 	}
@@ -35,6 +39,10 @@ public class DonationService {
 	
 	public int sumAmount(int id) {
 		return repo.getTotalAmountByProjectId(id);
+	}
+	
+	public int sumAmount(int projectId, int accountId) {
+		return repo.getTotalAmountByProjectIdAndAccountId(projectId, accountId);
 	}
 	
 	public int countDonation(int id) {
