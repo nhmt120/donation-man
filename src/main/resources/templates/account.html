@@ -54,6 +54,8 @@
 					</tr>
 					<tr>
 						<th>Balance:</th>
+						<input hidden class="form-control" th:field="*{balance}" th:value="${account.balance}">
+
 						<td>
 							<span th:text="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"></span>
 						</td>

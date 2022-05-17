@@ -60,6 +60,7 @@ public class AccountController {
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int accountId = user.getUserId();
 		Account currentAccount = accountService.get(accountId);
+		
 		int currentAmount = currentAccount.getBalance();
 		int newAmount = currentAmount + amount;
 		accountService.updateBalance(accountId, newAmount);
@@ -97,14 +98,20 @@ public class AccountController {
 
 	@PostMapping("/update")
 	public String updateAccount(@ModelAttribute("account") Account account) {
-//		int id = account.getId();
-//		String name = account.getName();
-//		String accountName = account.getUsername();
-//
-//		Account updatedAccount = new Account(name, accountName, password);
-//		updatedAccount.setId(id);
+		int id = account.getId();
+		String name = account.getName();
+		String accountName = account.getUsername();
+		int balance = account.getBalance();
+		
+		Account updatedAccount = new Account();
+		updatedAccount.setId(id);
+		updatedAccount.setName(name);
+		updatedAccount.setUsername(accountName);
+		updatedAccount.setBalance(balance);
+		
 		accountService.update(account);
-
+		
+		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		boolean isAdmin = accountService.get(user.getUserId()).hasRole("admin");
 

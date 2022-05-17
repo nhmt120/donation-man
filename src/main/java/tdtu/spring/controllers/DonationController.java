@@ -52,7 +52,7 @@ public class DonationController {
 
 	@GetMapping("")
 	public String showAccountDonationList(Model model) {
-		
+
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Account account = accountService.get(user.getUserId());
 
@@ -70,38 +70,40 @@ public class DonationController {
 	}
 
 	@GetMapping("/add/{projectId}")
-	public String saveDonation(@RequestParam("amount") int amount, @ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
-		
+	public String saveDonation(@RequestParam("amount") int amount, @ModelAttribute(value = "donation") Donation donation,
+			@PathVariable int projectId) {
+
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int accountId = user.getUserId();
-		
+
 		System.out.println("==============================================================");
 		System.out.println(user.getUserId());
 		System.out.println("==============================================================");
-		
+
 		Project project = projectService.get(projectId);
 		Account account = accountService.get(accountId);
-		
-		if(account.getBalance() < amount) {
+
+		if (account.getBalance() < amount) {
 			Map<String, Object> uriVariables = new HashMap<>();
 			uriVariables.put("insufficient", "true");
-			return "redirect:/projects/" + projectId + "?insufficient=true";
+			return "redirect:/project/" + projectId + "?insufficient=true";
+		} else {
+			Donation newDonation = new Donation(amount);
+			newDonation.setProject(project);
+			newDonation.setAccount(account);
+
+			int newBalance = account.getBalance() - amount;
+
+			donationService.save(newDonation);
+			int newfund = donationService.sumAmount(projectId);
+			int dnum = donationService.countDonation(projectId);
+			projectService.updateCurrentFund(projectId, newfund);
+			projectService.updateDonationNum(projectId, dnum);
+			accountService.updateBalance(accountId, newBalance);
+
+			return "redirect:/project/" + projectId;
 		}
 
-		Donation newDonation = new Donation(amount);
-		newDonation.setProject(project);
-		newDonation.setAccount(account);
-		
-		int newBalance = account.getBalance() - amount;
-
-		donationService.save(newDonation);
-		int newfund = donationService.sumAmount(projectId);
-		int dnum = donationService.countDonation(projectId);
-		projectService.updateCurrentFund(projectId, newfund);
-		projectService.updateDonationNum(projectId, dnum);
-		accountService.updateBalance(accountId, newBalance);
-		
-		return "redirect:/project/" + projectId;
 	}
 
 }
