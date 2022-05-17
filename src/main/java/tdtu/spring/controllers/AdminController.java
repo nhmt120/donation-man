@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import tdtu.spring.models.Account;
 import tdtu.spring.models.Project;
 import tdtu.spring.services.AccountService;
+import tdtu.spring.services.DonationService;
 import tdtu.spring.services.ProjectService;
 
 @Controller
@@ -32,6 +33,9 @@ public class AdminController {
 
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	private DonationService donationService;
 
 	@Autowired
 	PasswordEncoder passwordEncoder;
@@ -90,4 +94,11 @@ public class AdminController {
 
 		return "redirect:/admin/accounts";
 	}
+	
+  @GetMapping("/donations")
+  public String showDonationList(Model model) {
+  	model.addAttribute("donations", donationService.findAll());
+  	return "admin/manage-donation";
+  }
+	
 }

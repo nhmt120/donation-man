@@ -32,6 +32,9 @@
 							<li sec:authorize="hasAuthority('admin')" class="nav-item">
 								<a class="nav-link" th:href="@{/admin/accounts}">Accounts</a>
 							</li>
+							<li sec:authorize="hasAuthority('admin')" class="nav-item">
+								<a class="nav-link" th:href="@{/admin/donations}">Donations</a>
+							</li>
 							<span sec:authorize="isAnonymous()">
 								<li class="nav-item">
 									<a class="nav-link" th:href="@{/login}">Login</a>
