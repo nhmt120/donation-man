@@ -89,7 +89,7 @@
 					<tr th:each="project : ${projects}">
 						<th class="text-center" scope="row" th:utext="${project.id}">...</th>
 						<td>
-							<a class="text-primary" th:href="@{'/projects/'+${project.id}}" th:utext="${project.name}"></a>
+							<a class="text-primary" th:href="@{'/project/'+${project.id}}" th:utext="${project.name}"></a>
 						</td>
 						<td th:utext="${project.currentFund}"></td>
 						<td th:utext="${project.targetFund}"></td>

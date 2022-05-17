@@ -32,11 +32,12 @@
 			<table border="1" class="table">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">ID</th>
-						<th scope="col">Name</th>
-						<th scope="col">Current Fund</th>
-						<th scope="col">Target Fund</th>
-						<th scope="col">Number of Donations</th>
+						<th class="text-center" scope="col">ID</th>
+						<th class="text-center" scope="col">Name</th>
+						<th class="text-center" scope="col">Current Fund</th>
+						<th class="text-center" scope="col">Target Fund</th>
+						<th class="text-center" scope="col">Number of Donations</th>
+						<th class="text-center" scope="col">Fundraiser ID</th>
 						<th class="text-center" scope="col">Status</th>
 						<th class="text-center" scope="col" colspan="3">Modify</th>
 					</tr>
@@ -45,7 +46,7 @@
 					<tr th:each="project : ${projects}">
 						<th scope="row" th:utext="${project.id}">...</th>
 						<td>
-							<a class="text-primary" th:href="@{'/projects/'+${project.id}}" th:utext="${project.name}"></a>
+							<a class="text-primary" th:href="@{'/project/'+${project.id}}" th:utext="${project.name}"></a>
 						</td>
 						<td th:utext="${#numbers.formatDecimal(project.currentFund, 0, 'COMMA', 0, 'POINT')}"></td>
 						<td th:utext="${#numbers.formatDecimal(project.targetFund, 0, 'COMMA', 0, 'POINT')}"></td>
@@ -54,6 +55,8 @@
 <!-- 							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span> -->
 <!-- 							<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span> -->
 <!-- 						</td> -->
+						<td th:utext="${project.account.getId()}"></td>
+
 						<td class="text-center align-middle" th:switch="${project.status}">
 							<span th:case="'Running'" class="badge badge-pill badge-success">Running</span>
 							<span th:case="'Finished'" class="badge badge-pill badge-secondary">Finished</span>

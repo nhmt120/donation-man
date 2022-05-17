@@ -19,7 +19,30 @@
 	<div th:replace="/fragments/header::header"></div>
 
 		<!-- ------------------------------------- Donation List ------------------------------------------------------ -->
-
+<div class="container col-md-9">
+			<h1>Project you have donated in</h1>
+			<br>
+			<table border="1" class="table">
+				<thead class="thead-dark">
+					<tr>
+						<th class="text-center" scope="col">ID</th>
+						<th class="text-center" scope="col">Name</th>
+						<th class="text-center" scope="col">Amount</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="donation : ${donations}">
+						<th scope="row" th:utext="${donation[0]}">...</th>
+<!-- 						<td th:utext="${donation[1]}"></td> -->
+						<td>
+							<a class="text-primary" th:href="@{'/project/'+${donation[0]}}" th:utext="${donation[1]}"></a>
+						</td>
+						
+						<td th:utext="${#numbers.formatDecimal(donation[2], 0, 'COMMA', 0, 'POINT')}"></td>
+					</tr>
+				<tbody>
+			</table>
+		</div>
 		<!-- ------------------------------------- Donation List Ends ------------------------------------------------------ -->
 	
 	<div th:replace="/fragments/footer::footer"></div>

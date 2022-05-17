@@ -55,31 +55,24 @@ public class DonationController {
 		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Account account = accountService.get(user.getUserId());
-		
-		List<Donation> donations = donationService.findByAccountId(account.getId());
+
+		List<Object[]> donations = donationService.getProjectAmountByAccountId(account.getId());
+
+		System.out.println("----------------------------------------------------------------------------------------");
 		System.out.println(donations);
-		
+
 //		sumAmount(projectId, accountId);
-		
-		
+
 //		model.addAttribute("account", donationService);
 //		model.addAttribute("projects", donationService);
-//		model.addAttribute("donations", donationService);
+		model.addAttribute("donations", donations);
 		return "donation-list";
 	}
 
-//	@GetMapping("/add")
-//	public String showAddDonation(Model model) {
-//		model.addAttribute("donation", new Donation());
-//		return "add-donation";
-//	}
-//
 	@GetMapping("/add/{projectId}")
 	public String saveDonation(@RequestParam("amount") int amount, @ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		
-//		int amount = donation.getAmount();
 		int accountId = user.getUserId();
 		
 		System.out.println("==============================================================");

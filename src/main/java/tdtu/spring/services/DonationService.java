@@ -45,6 +45,10 @@ public class DonationService {
 		return repo.getTotalAmountByProjectIdAndAccountId(projectId, accountId);
 	}
 	
+	public List<Object[]> getProjectAmountByAccountId(int accountId) {
+		return repo.getProjectAmountByAccountId(accountId);
+	}
+	
 	public int countDonation(int id) {
 		return repo.countByProjectId(id);
 	}
