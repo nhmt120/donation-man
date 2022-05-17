@@ -17,7 +17,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	Account findByUsername(String username);
 
 	@Override
-	@Query("SELECT a FROM Account a")
+	@Query("SELECT a FROM Account a ORDER BY a.id DESC")
 	public List<Account> findAll();
 
 	@Modifying

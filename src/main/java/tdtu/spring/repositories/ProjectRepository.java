@@ -12,14 +12,16 @@ import tdtu.spring.models.Project;
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
+	@Query("SELECT p FROM Project p WHERE p.account.id = ?1 ORDER BY p.id DESC")
 	public List<Project> findByAccountId(int id);
 
 	@Override
-	@Query("SELECT p FROM Project p")
+	@Query("SELECT p FROM Project p ORDER BY p.id DESC")
 	public List<Project> findAll();
 
 //	public List<Project> findByIsActive(boolean isActive);
 
+	@Query("SELECT p FROM Project p WHERE status = ?1 ORDER BY p.id DESC")
 	public List<Project> findByStatus(String status);
 
 	@Modifying

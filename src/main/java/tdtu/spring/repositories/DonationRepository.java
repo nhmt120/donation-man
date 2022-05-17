@@ -13,20 +13,15 @@ import tdtu.spring.models.Donation;
 public interface DonationRepository extends JpaRepository<Donation, Integer> {
 
 	@Override
-	@Query("SELECT d FROM Donation d")
+	@Query("SELECT d FROM Donation d ORDER BY d.id DESC")
 	public List<Donation> findAll();
 	
-	public List<Donation> findByAccountId(int id);
-
 	@Query(value = "SELECT SUM(d.amount) FROM Donation d WHERE d.project_id = ?1", nativeQuery = true)
 	public int getTotalAmountByProjectId(int id);
-
-	@Query(value = "SELECT SUM(d.amount) FROM Donation d WHERE d.project_id = ?1 and d.account_id = ?2", nativeQuery = true)
-	public int getTotalAmountByProjectIdAndAccountId(int projectId, int accountId);
 
 	@Query(value = "SELECT COUNT(d.amount) FROM Donation d WHERE d.project_id = ?1", nativeQuery = true)
 	public int countByProjectId(int id);
 	
-	@Query(value = "SELECT d.project_id, p.name, SUM(d.amount) as amount FROM donation d, project p WHERE d.account_id = ?1 and d.project_id=p.id group by d.project_id order by d.project_id", nativeQuery = true)
+	@Query(value = "SELECT d.project_id, p.name, SUM(d.amount) as amount FROM donation d, project p WHERE d.account_id = ?1 and d.project_id=p.id group by d.project_id order by d.project_id desc", nativeQuery = true)
 	public List<Object[]> getProjectAmountByAccountId(int id);
 }
