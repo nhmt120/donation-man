@@ -20,7 +20,7 @@ public class Project {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
+	@Lob
 	private String description;
 
 	@Column(name = "image", columnDefinition = "varchar(255) default '/images/events/image_01.jpg'")
