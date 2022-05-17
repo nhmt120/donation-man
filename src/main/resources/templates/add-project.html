@@ -25,13 +25,13 @@
 		<form class="form-edit" th:action="@{add}" th:object="${project}" method="post" enctype="multipart/form-data">
 			<div class="container">
 				<label for="name"><b>Name:</b></label>
-				<input id="name" type="text" th:field="*{name}" required/>
+				<input id="name" type="text" class="form-control" th:field="*{name}" required/>
 
 				<label for="desc"><b>Description:</b></label>
 				<textarea id="desc" rows="3" class="form-control" th:field="*{description}" required> </textarea>
 
 				<label for="target"><b>Target Fund:</b></label>
-				<input id="target" type="number" th:field="*{targetFund}" required/>
+				<input id="target" type="number" class="form-control" th:field="*{targetFund}" required/>
 
 				<label for="image"><b>Image:</b></label>			    
 				<input id="image" type="file" class="form-control-file" name="uploadImage" accept="image/png, image/jpeg" required/>

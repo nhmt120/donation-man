@@ -25,17 +25,17 @@
 		<div th:if="${param.logout}">
 			<div class="alert alert-secondary" role="alert">You have been logged out.</div>
 		</div>
-		<form class="form-edit container" th:action="@{/j_spring_security_check}" method="post">
+		<form class="form-edit" th:action="@{/j_spring_security_check}" method="post">
 			<div class="container">
 				<label for="username">
 					<b>Username</b>
 				</label>
-				<input type="text" placeholder="Enter Username" name="username" required>
+				<input type="text" class="form-control" placeholder="Enter Username" name="username" required>
 
 				<label for="password">
 					<b>Password</b>
 				</label>
-				<input type="password" placeholder="Enter Password" name="password" required>
+				<input type="password" class="form-control" placeholder="Enter Password" name="password" required>
 
 				<button type="submit" class="btn btn-primary">Login</button>
 			</div>

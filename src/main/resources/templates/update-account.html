@@ -37,27 +37,28 @@
 		<div class="text-center">
 			<h1>Update Account</h1>
 		</div>
-		<form class="form-edit container" th:action="@{/accounts/update}" th:object=${account}
-			method="post">
-			Account ID:
-			<b>
-				<span id="id" th:text="${account.id}"></span>
-			</b>
-			<input type="hidden" th:field="*{id}" />
-			<br>
-			Name:
-			<input type="text" th:field="*{name}" th:value="${account.name}" />
-			<br>
-			Username:
-			<input type="text" th:field="*{username}" th:value="${account.username}" />
-			<br>
-			Balance:
-			<input type="text" th:field="*{balance}" th:value="${account.balance}" />
-			<br>
-			Role:
-			<input type="text" th:field="*{role}" th:value="${account.role}" />
-			<br>
-			<input onclick="confirmAction()" type="submit" value="Update">
+		<form class="form-edit container" th:action="@{/accounts/update}" th:object=${account} method="post">
+			<div class="container">
+				Account ID:
+				<b>
+					<span id="id" th:text="${account.id}"></span>
+				</b>
+				<input type="hidden" th:field="*{id}" />
+				<br>
+				Name:
+				<input type="text" th:field="*{name}" th:value="${account.name}" />
+				<br>
+				Username:
+				<input type="text" th:field="*{username}" th:value="${account.username}" />
+				<br>
+				Balance:
+				<input type="text" th:field="*{balance}" th:value="${account.balance}" />
+				<br>
+				Role:
+				<input type="text" th:field="*{role}" th:value="${account.role}" />
+				<br>
+				<input onclick="confirmAction()" type="submit" value="Update">
+			</div>
 		</form>
 	</div>
 	<br>
