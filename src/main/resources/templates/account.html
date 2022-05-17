@@ -91,8 +91,8 @@
 						<td>
 							<a class="text-primary" th:href="@{'/project/'+${project.id}}" th:utext="${project.name}"></a>
 						</td>
-						<td th:utext="${project.currentFund}"></td>
-						<td th:utext="${project.targetFund}"></td>
+						<td th:utext="${#numbers.formatDecimal(project.currentFund, 0, 'COMMA', 0, 'POINT')}"></td>
+						<td th:utext="${#numbers.formatDecimal(project.targetFund, 0, 'COMMA', 0, 'POINT')}"></td>
 						<td th:utext="${project.donationNum}"></td>
 						<!-- 						<td class="text-center align-middle"> -->
 						<!-- 							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span> -->
