@@ -104,7 +104,7 @@
 							<span th:case="'Pending'" class="badge badge-pill badge-primary">Pending</span>
 						</td>
 						<td class="text-center">
-							<form th:action="@{'/projects/retrieve/'+${project.id}}">
+							<form th:action="@{'/projects/retrieve/'+${project.id}}" method="get">
 								<button type="submit" class="btn btn-warning" th:disabled="${project.status != 'Running'}">Retrieve</button>
 							</form>
 						</td>

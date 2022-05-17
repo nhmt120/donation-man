@@ -24,7 +24,7 @@
 			</div>
 			<div class="event-ro row">
 				<div class="col-md-4 col-sm-6" th:each="project, iStat : ${projectPage.content}">
-					<a th:href="@{'/projects/'+${project.id}}">
+					<a th:href="@{'/project/'+${project.id}}">
 						<div class="card event-box">
 							<img class="card-img-top" th:src="${project.image}" alt="">
 

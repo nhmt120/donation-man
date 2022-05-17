@@ -76,7 +76,7 @@ public class ProjectController {
 
 		Project newProject = new Project(name, description, targetFund, account, image);
 		projectService.save(newProject);
-		return "redirect:/";
+		return "redirect:/accounts/detail";
 	}
 
 	@GetMapping("/update/{id}")
@@ -120,7 +120,7 @@ public class ProjectController {
 		int currentFund = project.getCurrentFund();
 		String status = project.getStatus();
 		
-		if (status == "Running" && ownerId == account.getId()) {
+		if (status.equals("Running") && ownerId == account.getId()) {
 			accountService.updateBalance(account.getId(), currentBalance + currentFund);
 			projectService.updateStatus(projectId, "Finished");
 		} else {

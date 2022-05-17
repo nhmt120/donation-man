@@ -29,7 +29,7 @@
 					<table class="project-info">
 						<tr>
 							<th class="fit">Raised:</th>
-							<td class="text-center">
+							<td class="text-center" colspan="2">
 								<span th:text="${#numbers.formatDecimal(project.currentFund, 0, 'COMMA', 0, 'POINT')}"
 									class="currentfund font-weight-bold"></span>
 								/
@@ -55,7 +55,7 @@
 								<b th:text="${project.donationNum}"> </b>
 								donation(s)
 							</td>
-							<td colspan="2">
+							<td>
 								Achieved:
 								<b
 									th:text="${#numbers.formatDecimal(((project.currentFund + 0.0) / project.targetFund) * 100, 1, 0)} + '%'">
