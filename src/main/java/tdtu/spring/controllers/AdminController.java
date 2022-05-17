@@ -8,9 +8,13 @@ import java.util.stream.IntStream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,12 +26,15 @@ import tdtu.spring.services.ProjectService;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
-	
+
 	@Autowired
 	private ProjectService projectService;
 
 	@Autowired
 	private AccountService accountService;
+
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	@GetMapping("")
 	public String showHome(Model model, @RequestParam("page") Optional<Integer> page,
@@ -47,7 +54,7 @@ public class AdminController {
 		}
 		return "admin/home";
 	}
-	
+
 	@GetMapping("/projects")
 	public String showManageProject(Model model) {
 		List<Project> projects = projectService.findAll();
@@ -61,5 +68,26 @@ public class AdminController {
 		model.addAttribute("accounts", accounts);
 		return "admin/manage-account";
 	}
+
+	@GetMapping("/aprrove/{projectId}")
+	public String approveProject(@PathVariable(name = "projectId") int projectId) {
+		System.out.println(projectId);
+
+		projectService.updateStatus(projectId, "Running");
+
+		return "redirect:/admin/projects";
+	}
 	
+	@PostMapping("/add-account")
+	public String addAccount(@ModelAttribute("account") Account account) {
+		String name = account.getName();
+		String username = account.getUsername();
+		String password = passwordEncoder.encode(account.getPassword());
+		String role = "user&admin";// account.getRole();
+
+		Account newAccount = new Account(name, username, password, role);
+		accountService.save(newAccount);
+
+		return "redirect:/admin/accounts";
+	}
 }

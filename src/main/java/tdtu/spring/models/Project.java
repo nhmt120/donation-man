@@ -26,22 +26,6 @@ public class Project {
 	@Column(name = "image", columnDefinition = "varchar(255) default '/images/events/image_01.jpg'")
 	private String image = "/images/events/image_01.jpg";
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
-	}
-
 	@Column(nullable = false)
 	private int targetFund;
 
@@ -56,14 +40,22 @@ public class Project {
 	private List<Donation> donationList = new ArrayList<>();
 
 	@ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY) // EAGER)
-	@JoinColumn(name = "account_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)) // insertable
-																																																												// =
-																																																												// false,
-//	@JsonIgnoreProperties("donationList")
+	@JoinColumn(name = "account_id", referencedColumnName = "id", foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT))
 	private Account account;
 
-	@ColumnDefault("true")
-	boolean isActive = true;
+//	@ColumnDefault("true")
+//	boolean isActive = true;
+
+	@Column(name = "status", columnDefinition = "varchar(255) default 'Pending'")
+	private String status = "Pending";
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
 	public void addDonation(Donation donation) {
 		this.donationList.add(donation);
@@ -73,13 +65,13 @@ public class Project {
 		super();
 	}
 
-	public boolean isActive() {
-		return isActive;
-	}
-
-	public void setActive(boolean isActive) {
-		this.isActive = isActive;
-	}
+//	public boolean isActive() {
+//		return isActive;
+//	}
+//
+//	public void setActive(boolean isActive) {
+//		this.isActive = isActive;
+//	}
 
 	public Project(String name, String description, int targetFund) {
 		super();
@@ -95,6 +87,22 @@ public class Project {
 		this.targetFund = targetFund;
 		this.account = account;
 		this.image = image;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
 	}
 
 	public int getId() {

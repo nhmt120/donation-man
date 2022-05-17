@@ -10,10 +10,12 @@ public class CustomUser extends User {
 		// to retrieve logged in Account ID from Spring Security Settings
 
     private final int userId;
+    private final String name;
 
-    public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, int userId) {
+    public CustomUser(String username, String password, Collection<? extends GrantedAuthority> authorities, int userId, String name) {
         super(username, password, authorities);
         this.userId = userId;
+        this.name = name;
     }
 
 		@Override
@@ -24,5 +26,9 @@ public class CustomUser extends User {
 
 		public int getUserId() {
 			return userId;
+		}   
+
+		public String getName() {
+			return name;
 		}   
 }

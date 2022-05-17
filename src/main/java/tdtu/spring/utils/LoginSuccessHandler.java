@@ -25,11 +25,6 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws ServletException, IOException {
 
-//  		UserDetails userDetails = (UserDetails) new CustomUser(account.getUsername(), //
-//  				account.getPassword(), grantList, account.getId());
-
-//		CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
-
 		CustomUser user = (CustomUser) authentication.getPrincipal();
 		Account account = accountService.get(user.getUserId());
 
@@ -37,7 +32,7 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
 
 		if (account.hasRole("admin")) {
 
-			redirectURL = "admin";
+			redirectURL = "";
 		} else {
 
 			redirectURL = "";

@@ -22,7 +22,7 @@
 		<div class="text-center">
 			<h1>Register account</h1>
 		</div>
-		<form class="form-edit container" th:action="@{add}" th:object="${account}" method="post">
+		<form class="form-edit container" th:action="@{register}" th:object="${account}" method="post">
 			<div class="container">
 				<label for="name"><b>Name:</b></label>
 				<input id="name" type="text" th:field="*{name}" placeholder="Name" required />
@@ -32,6 +32,12 @@
 				
 				<label for="password"><b>Password:</b></label>
 				<input id="password" type="password" th:field="*{password}" placeholder="Password" required />
+				
+				<div sec:authorize="hasAuthority('admin')">
+					<label for="role"><b>Role:</b></label>
+					<input id="role" type="text" th:field="*{role}" placeholder="Role"/>
+				</div>
+				
 				
 				<input  type="submit" class="btn btn-primary" value="Register" required />
 			</div>

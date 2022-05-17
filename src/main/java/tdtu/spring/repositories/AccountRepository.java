@@ -21,8 +21,8 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 	public List<Account> findAll();
 
 	@Modifying
-	@Query(value = "UPDATE Account a SET a.name = ?2, a.username = ?3, a.role = ?4 WHERE a.id = ?1", nativeQuery = true)
-	void updateById(int id, String name, String username, String role);
+	@Query(value = "UPDATE Account a SET a.name = ?2, a.username = ?3, a.role = ?4, a.balance = ?5 WHERE a.id = ?1", nativeQuery = true)
+	void updateById(int id, String name, String username, String role, int balance);
 
 	@Modifying
 	@Transactional

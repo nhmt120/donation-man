@@ -50,7 +50,7 @@ public class HomeController {
 		return "home";
 	}
 
-	@GetMapping("/projects/{id}")
+	@GetMapping("/project/{id}")
 	public String showProjectDetail(Model model, @PathVariable(name = "id") int id) {
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -61,7 +61,7 @@ public class HomeController {
 		model.addAttribute("project", project);
 		model.addAttribute("account", account);
 		model.addAttribute("donation", new Donation());
-		return "project";
+		return "project-detail";
 	}
 
 	@GetMapping("/login")

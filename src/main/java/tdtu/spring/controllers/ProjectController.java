@@ -52,7 +52,7 @@ public class ProjectController {
 			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 			model.addAttribute("pageNumbers", pageNumbers);
 		}
-		return "projects";
+		return "running-projects";
 	}
 
 	@GetMapping("/add")
@@ -110,22 +110,25 @@ public class ProjectController {
 	@GetMapping("/retrieve/{projectId}")
 	public String retrieveFund(@PathVariable(name = "projectId") int projectId) {
 		// only project owner can retrieve its funding
+		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		Account account = accountService.get(user.getUserId());
 		int currentBalance = account.getBalance();
 
 		Project project = projectService.get(projectId);
+		int ownerId = project.getAccount().getId();
 		int currentFund = project.getCurrentFund();
-		boolean isActive = project.isActive();
-
-		if (isActive == true) {
+		String status = project.getStatus();
+		
+		if (status == "Running" && ownerId == account.getId()) {
 			accountService.updateBalance(account.getId(), currentBalance + currentFund);
-			projectService.updateIsActive(projectId, false);
+			projectService.updateStatus(projectId, "Finished");
 		} else {
 
 		}
 
 		return "redirect:/accounts/detail";
 	}
+	
 
 }

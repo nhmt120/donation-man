@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-	<div th:replace="/admin/header::header"></div>
+	<div th:replace="/fragments/header::header"></div>
 
 		<!-- ------------------------------------- Project List ------------------------------------------------------ -->
 		<div class="container col-md-9">
@@ -37,7 +37,7 @@
 						<th scope="col">Current Fund</th>
 						<th scope="col">Target Fund</th>
 						<th scope="col">Number of Donations</th>
-						<th scope="col">Is Active</th>
+						<th class="text-center" scope="col">Status</th>
 						<th class="text-center" scope="col" colspan="3">Modify</th>
 					</tr>
 				</thead>
@@ -47,15 +47,20 @@
 						<td>
 							<a class="text-primary" th:href="@{'/projects/'+${project.id}}" th:utext="${project.name}"></a>
 						</td>
-						<td th:utext="${project.currentFund}"></td>
-						<td th:utext="${project.targetFund}"></td>
+						<td th:utext="${#numbers.formatDecimal(project.currentFund, 0, 'COMMA', 0, 'POINT')}"></td>
+						<td th:utext="${#numbers.formatDecimal(project.targetFund, 0, 'COMMA', 0, 'POINT')}"></td>
 						<td th:utext="${project.donationNum}"></td>
-						<td class="text-center">
-							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span>
-							<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span>
+<!-- 						<td class="text-center"> -->
+<!-- 							<span th:if="${project.isActive}" class="badge badge-pill badge-success">Running</span> -->
+<!-- 							<span th:unless="${project.isActive}" class="badge badge-pill badge-secondary">Finished</span> -->
+<!-- 						</td> -->
+						<td class="text-center align-middle" th:switch="${project.status}">
+							<span th:case="'Running'" class="badge badge-pill badge-success">Running</span>
+							<span th:case="'Finished'" class="badge badge-pill badge-secondary">Finished</span>
+							<span th:case="'Pending'" class="badge badge-pill badge-primary">Pending</span>
 						</td>
 						<td class="text-center">
-							<a class="btn btn-warning" th:href="@{'/projects/retrieve/'+${project.id}}">Retrieve</a>
+							<a class="btn btn-warning" th:href="@{'/admin/aprrove/'+${project.id}}">Approve</a>
 						</td>
 						<td class="text-center">
 							<a class="btn btn-primary" th:href="@{'/projects/update/'+${project.id}}">Update</a>

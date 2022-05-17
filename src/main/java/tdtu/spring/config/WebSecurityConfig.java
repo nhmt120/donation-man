@@ -28,24 +28,29 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired private LoginSuccessHandler loginSuccessHandler;
 
   @Override
-  protected void configure(HttpSecurity http) throws Exception {
-      http
-              .authorizeRequests()
-                .antMatchers("/", "/accounts/add").permitAll() // allow everyone to access these mappings
-                .anyRequest().authenticated() // every other request has to be authenticated to get access to 
-                .and()
-              .formLogin()
-              	.loginProcessingUrl("/j_spring_security_check")
-              	.loginPage("/login") // allow authentication with this custom login form
-//              	.defaultSuccessUrl("/", true)
-              	.failureUrl("/login?error=true")
-              	.usernameParameter("username")//
-        				.passwordParameter("password")
-        				.successHandler(loginSuccessHandler)
-              	.permitAll()
-              	.and()
-              .logout()
-              	.permitAll();
+	protected void configure(HttpSecurity http) throws Exception {
+    http
+        .authorizeRequests()
+          .antMatchers("/", "/accounts/register", "/projects").permitAll() // allow everyone to access these mappings
+          .antMatchers("/admin/**").hasAuthority("admin")
+          .anyRequest().authenticated() // every other request has to be authenticated to get access to 
+          .and()
+        .formLogin()
+        	.loginProcessingUrl("/j_spring_security_check")
+        	.loginPage("/login") // allow authentication with this custom login form
+        	.failureUrl("/login?error=true")
+        	.usernameParameter("username")//
+  				.passwordParameter("password")
+  				.successHandler(loginSuccessHandler)
+        	.permitAll()
+        	.and()
+        .logout()
+        	.permitAll();
+      
+//    http
+//    		.authorizeRequests()
+//    			.antMatchers("/admin/**").hasAuthority("admin")
+//    			.anyRequest().authenticated();
   }
   
   @Override

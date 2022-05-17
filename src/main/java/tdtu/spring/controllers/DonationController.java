@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
@@ -54,14 +55,12 @@ public class DonationController {
 //		return "add-donation";
 //	}
 //
-	@PostMapping("/add/{projectId}")
-	public String saveDonation(@ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
-
-
+	@GetMapping("/add/{projectId}")
+	public String saveDonation(@RequestParam("amount") int amount, @ModelAttribute(value = "donation") Donation donation, @PathVariable int projectId) {
 		
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		
-		int amount = donation.getAmount();
+//		int amount = donation.getAmount();
 		int accountId = user.getUserId();
 		
 		System.out.println("==============================================================");

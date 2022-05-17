@@ -20,7 +20,7 @@
 </script>
 </head>
 <body>
-	<div th:replace="/admin/header::header"></div>
+	<div th:replace="/fragments/header::header"></div>
 
 		<!-- ------------------------------------- Project List ------------------------------------------------------ -->
 		<div class="container col-md-9">
@@ -42,11 +42,10 @@
 				</thead>
 				<tbody>
 					<tr th:each="account : ${accounts}">
-<!-- 						<th scope="row" th:utext="${account.id}">...</th> -->
 						<td th:utext="${account.id}">
 						<td th:utext="${account.name}"></td>
 						<td th:utext="${account.username}"></td>
-						<td th:utext="${account.balance}"></td>
+						<td th:utext="${#numbers.formatDecimal(account.balance, 0, 'COMMA', 0, 'POINT')}"></td>
 						<td th:utext="${account.role}"></td>
 						<td class="text-center">
 							<a class="btn btn-primary" th:href="@{'/accounts/update/'+${account.id}}">Update</a>

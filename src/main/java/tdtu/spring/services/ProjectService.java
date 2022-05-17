@@ -29,8 +29,12 @@ public class ProjectService {
 		return repo.findAll();
 	}
 
-	public List<Project> findActive(boolean isActive) {
-		return repo.findByIsActive(isActive);
+//	public List<Project> findActive(boolean isActive) {
+//		return repo.findByIsActive(isActive);
+//	}
+
+	public List<Project> findByStatus(String status) {
+		return repo.findByStatus(status);
 	}
 
 	public List<Project> findByAccountId(int id) {
@@ -62,27 +66,27 @@ public class ProjectService {
 		repo.updateDonationNumById(id, dnum);
 	}
 
-	public void updateIsActive(int id, boolean isActive) {
-		repo.updateIsActiveById(id, isActive);
+//	public void updateIsActive(int id, boolean isActive) {
+//		repo.updateIsActiveById(id, isActive);
+//	}
+
+	public void updateStatus(int id, String status) {
+		repo.updateStatusById(id, status);
 	}
 
 	public Page<Project> findPaginatedProject(Pageable pageable) {
-		List<Project> projects = findActive(true);
-
+		List<Project> projects = findByStatus("Running");// findActive(true);
 		int pageSize = pageable.getPageSize();
 		int currentPage = pageable.getPageNumber();
 		int startItem = currentPage * pageSize;
 		List<Project> list;
-
 		if (projects.size() < startItem) {
 			list = Collections.emptyList();
 		} else {
 			int toIndex = Math.min(startItem + pageSize, projects.size());
 			list = projects.subList(startItem, toIndex);
 		}
-
 		Page<Project> projectPage = new PageImpl<Project>(list, PageRequest.of(currentPage, pageSize), projects.size());
-
 		return projectPage;
 	}
 }

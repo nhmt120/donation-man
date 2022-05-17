@@ -1,56 +1,78 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security5">
 <head>
-	<meta charset="utf-8">
-	<title>Insert title here</title>
+<meta charset="utf-8">
+<title>Insert title here</title>
 </head>
 <body>
-<header th:fragment="header" class="container-fluid">
-    <div id="menu-jk" class="header-bottom">
-        <div class="container">
-            <div class="row nav-row">
-                <div class="col-lg-3 col-md-12 logo">
-                    <a th:href="@{/}">
-                        <img src="/images/logo-tdt.png" alt="" style="width:110px;height:50px;">
-                        <a data-toggle="collapse" data-target="#menu" href="#menu"><i class="fas d-block d-lg-none  small-menu fa-bars"></i></a>
-                    </a>
-
-                </div>
-                <div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
-
-                            <ul class="navbad">
-                                <li class="nav-item active">
-                                    <a class="nav-link" th:href="@{/}">Home
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:href="@{/projects}">Projects</a>
-                                </li>
-
-								<span sec:authorize="isAnonymous()">
-									<li class="nav-item">
-		                            	<a class="nav-link" th:href="@{/login}">Login</a>
-		                            </li>
-		                            <li class="nav-item">
-		                                <a class="nav-link" th:href="@{/accounts/add}">Register</a>
-		                            </li>
-								</span>
-								<span sec:authorize="isAuthenticated()">
-									<li class="nav-item">
-		                            	<a class="nav-link" th:href="@{/accounts/detail}">Account</a>
-		                            </li>
-									<li class="nav-item">
-		                                <form th:action="@{/logout}" method="post">
-										  <input type="hidden" value="Sign Out"/>
-										  <button type="submit" class="btn-light nav-link">Logout</button>
+	<header th:fragment="header" class="container-fluid">
+		<div id="menu-jk" class="header-bottom">
+			<div class="container">
+				<div class="row nav-row">
+					<div class="col-lg-3 col-md-12 logo">
+						<a th:href="@{/}">
+							<img src="/images/logo-tdt.png" alt="" style="width: 110px; height: 50px;">
+							<a data-toggle="collapse" data-target="#menu" href="#menu">
+								<i class="fas d-block d-lg-none  small-menu fa-bars"></i>
+							</a>
+						</a>
+					</div>
+					<div id="menu" class="col-lg-9 col-md-12 d-none d-lg-block nav-col">
+						<ul class="navbad">
+							<li class="nav-item active">
+								<a class="nav-link" th:href="@{/}">Home </a>
+							</li>
+							<li class="nav-item" sec:authorize="!hasAuthority('admin')">
+								<a class="nav-link" th:href="@{/projects}">Projects</a>
+							</li>
+							<li sec:authorize="hasAuthority('admin')" class="nav-item">
+								<a class="nav-link" th:href="@{/admin/projects}">Projects</a>
+							</li>
+							<li sec:authorize="hasAuthority('admin')" class="nav-item">
+								<a class="nav-link" th:href="@{/admin/accounts}">Accounts</a>
+							</li>
+							<span sec:authorize="isAnonymous()">
+								<li class="nav-item">
+									<a class="nav-link" th:href="@{/login}">Login</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" th:href="@{/accounts/register}">Register</a>
+								</li>
+							</span>
+							<!-- 							<span sec:authorize="isAuthenticated()"> -->
+							<!-- 								<li class="nav-item"> -->
+							<!-- 									<a class="nav-link" th:href="@{/accounts/detail}">Account</a> -->
+							<!-- 								</li> -->
+							<!-- 								<li class="nav-item"> -->
+							<!-- 									<form th:action="@{/logout}" method="post"> -->
+							<!-- 										<input type="hidden" value="Sign Out" /> -->
+							<!-- 										<button type="submit" class="btn-light nav-link">Logout</button> -->
+							<!-- 									</form> -->
+							<!-- 								</li> -->
+							<!-- 							</span> -->
+							<span sec:authorize="isAuthenticated()">
+								<li class="nav-item">
+									<button class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+										aria-haspopup="true" aria-expanded="false">
+										<span>Hi, </span>
+										<span th:text="${#authentication.getPrincipal().getName()}"> </span>
+									</button>
+									<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+										<a class="dropdown-item" th:href="@{/accounts/detail}">Account Information</a>
+										<form th:action="@{/logout}" method="post">
+											<!-- 											<input type="hidden" value="Sign Out" /> -->
+											<!-- 											<button type="submit" class="btn-light nav-link">Logout</button> -->
+											<button class="dropdown-item" href="#" type="submit">Logout</button>
 										</form>
-	                                </li>
-								</span>
-                            </ul>
-                </div>
-            </div>
-        </div>
-    </div> 
-</header>
+									</div>
+								</li>
+							</span>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
 </body>
 </html>

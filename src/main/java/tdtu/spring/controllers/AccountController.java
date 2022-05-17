@@ -27,10 +27,10 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-	
+
 	@Autowired
 	private ProjectService projectService;
-	
+
 	@Autowired
 	PasswordEncoder passwordEncoder;
 
@@ -42,7 +42,7 @@ public class AccountController {
 
 	@GetMapping("/detail")
 	public String showAccountDetail(Model model) {
-		
+
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int accountId = user.getUserId();
 		Account account = accountService.get(accountId);
@@ -50,12 +50,12 @@ public class AccountController {
 		System.out.println(projects);
 		model.addAttribute("account", account);
 		model.addAttribute("projects", projects);
-		
+
 		return "account";
 	}
 
 	@GetMapping("/balance")
-	public String addBalance( @RequestParam("amount") int amount) {
+	public String addBalance(@RequestParam("amount") int amount) {
 
 		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		int accountId = user.getUserId();
@@ -66,24 +66,24 @@ public class AccountController {
 		return "redirect:/accounts/detail";
 	}
 
-	@GetMapping("/add")
+	@GetMapping("/register")
 	public String showAddAccount(Model model) {
 		model.addAttribute("account", new Account());
-		return "add-account";
+		
+		System.out.println("show register heerererererer");
+		return "register";
 	}
 
-	@PostMapping("/add")
-	public String saveAccount(@ModelAttribute("account") Account account) {
+	@PostMapping("/register")
+	public String register(@ModelAttribute("account") Account account) {
 		String name = account.getName();
 		String username = account.getUsername();
 		String password = passwordEncoder.encode(account.getPassword());
-		String role = "user&admin";//account.getRole();
-
+		String role = account.getRole();
+		
 		Account newAccount = new Account(name, username, password, role);
 		accountService.save(newAccount);
-
-//		System.out.println(newAccount);
-
+		
 		return "redirect:/login";
 	}
 
@@ -91,6 +91,7 @@ public class AccountController {
 	public String showUpdateAccount(Model model, @PathVariable(name = "id") int id) {
 		Account account = accountService.get(id);
 		model.addAttribute("account", account);
+		
 		return "update-account";
 	}
 
@@ -104,8 +105,17 @@ public class AccountController {
 //		updatedAccount.setId(id);
 		accountService.update(account);
 
+		CustomUser user = (CustomUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		boolean isAdmin = accountService.get(user.getUserId()).hasRole("admin");
+
+		if (isAdmin) {
+			return "redirect:/admin/accounts";
+		}
+
 		return "redirect:/accounts/detail";
+
 	}
+
 //
 	@GetMapping("/delete/{id}")
 	public String deleteAccount(Model model, @PathVariable(name = "id") int id) {

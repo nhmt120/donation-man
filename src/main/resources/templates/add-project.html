@@ -31,7 +31,7 @@
 				<textarea id="desc" rows="3" class="form-control" th:field="*{description}" required> </textarea>
 
 				<label for="target"><b>Target Fund:</b></label>
-				<input id="target" type="text" th:field="*{targetFund}" required/>
+				<input id="target" type="number" th:field="*{targetFund}" required/>
 
 				<label for="image"><b>Image:</b></label>			    
 				<input id="image" type="file" class="form-control-file" name="uploadImage" accept="image/png, image/jpeg" required/>
